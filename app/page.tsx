@@ -1,39 +1,8 @@
 "use client";
-import { CardStack } from "@/components/ui/card-stack";
 import { motion } from "framer-motion";
-
+import { testimonials, howItWorks } from "@/constant/landing-page";
+import { SignUpButton, LoginButton } from "@/components/auth-buttons";
 export default function Home() {
-  const testimonials = [
-    {
-      id: 1,
-      name: "John D.",
-      designation: "Software Engineer",
-      content:
-        "This platform helped me ace my interview by giving me real insights into the process. Highly recommend!",
-    },
-    {
-      id: 2,
-      name: "Sarah L.",
-      designation: "Product Manager",
-      content:
-        "I love how I can share my experiences anonymously without any fear. Great community!",
-    },
-    {
-      id: 3,
-      name: "Mike T.",
-      designation: "Data Scientist",
-      content:
-        "The salary data is spot on! It helped me negotiate a better offer.",
-    },
-    {
-      id: 4,
-      name: "Emily R.",
-      designation: "UX Designer",
-      content:
-        "A must-use platform for anyone looking to understand company culture before joining.",
-    },
-  ];
-
   return (
     <main className="bg-[#F7F7F7] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,9 +12,7 @@ export default function Home() {
             Next<span className="text-[#D91656]">Role</span>
             <div className="absolute -bottom-2 left-0 w-0 h-1 bg-[#D91656] group-hover:w-full transition-all duration-300"></div>
           </div>
-          <button className="px-6 py-2 bg-[#D91656] text-white transform hover:translate-y-[-2px] transition-all border-2 border-[#03051E]">
-            Sign Up with Google
-          </button>
+          <SignUpButton>Sign Up</SignUpButton>
         </nav>
 
         {/* Section 1: Hero Section */}
@@ -65,13 +32,11 @@ export default function Home() {
               ranges, and connect with a community of professionals – all
               anonymously.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <button className="px-8 py-3 bg-[#D91656] text-white transform hover:translate-y-[-2px] transition-all border-2 border-[#03051E]">
+            <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-4">
+              <SignUpButton className="w-full sm:w-auto">
                 Sign Up with Google
-              </button>
-              <button className="px-8 py-3 border-2 border-[#03051E] text-[#03051E] hover:bg-[#03051E] hover:text-white transform hover:translate-y-[-2px] transition-all">
-                Log In
-              </button>
+              </SignUpButton>
+              <LoginButton className="w-full sm:w-auto">Log In</LoginButton>
             </div>
             <div className="flex flex-wrap gap-4 text-sm text-gray-600">
               <span>✓ Anonymous Posting</span>
@@ -102,7 +67,7 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Section 2: What We Provide - Enhanced & Mobile Responsive */}
+        {/* Section 2: What We Provide */}
         <div className="py-12 sm:py-20">
           <div className="space-y-4 mb-12 sm:mb-16">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-900">
@@ -220,7 +185,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Section 3: Testimonials - Enhanced */}
+        {/* Section 3: Testimonials  */}
         <div className="py-12 sm:py-20">
           <div className="space-y-4 mb-12 sm:mb-16">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-900">
@@ -231,9 +196,9 @@ export default function Home() {
               NextRole.
             </p>
           </div>
-          <div className="relative">
-            <div className="absolute -z-10 w-96 h-96 bg-[#D91656] rounded-full opacity-5 blur-3xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="relative overflow-hidden">
+            <div className="absolute -z-10 w-[80%] h-96 bg-[#D91656] rounded-full opacity-5 blur-3xl left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
               {testimonials.map((testimonial, index) => (
                 <motion.div
                   key={testimonial.id}
@@ -276,51 +241,84 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Section 4: How It Works */}
-        <div className="py-20">
-          <h2 className="text-4xl font-bold text-center text-[#03051E] mb-16">
-            How It Works
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Sign Up with Google",
-                icon: "🔐",
-                description:
-                  "Create your account in seconds using your Google login.",
-              },
-              {
-                title: "Explore Anonymously",
-                icon: "🔍",
-                description:
-                  "Browse interview experiences, work culture, and salary data without revealing your identity.",
-              },
-              {
-                title: "Post & Connect",
-                icon: "✍️",
-                description:
-                  "Share your experiences, ask questions, and connect with others – all anonymously.",
-              },
-            ].map((step, index) => (
-              <motion.div
-                key={step.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="p-8 border-2 border-[#03051E] hover:bg-[#03051E] hover:text-white transition-all group rounded-lg"
-              >
-                <div className="text-4xl mb-4">{step.icon}</div>
-                <h3 className="text-xl font-bold mb-2">{step.title}</h3>
-                <p className="text-gray-600 group-hover:text-gray-300">
-                  {step.description}
-                </p>
-              </motion.div>
-            ))}
+        {/* Section 4: How It Works - Revamped */}
+        <div className="py-12 sm:py-20">
+          <div className="space-y-4 mb-12 sm:mb-16">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-900">
+              How It <span className="text-[#D91656]">Works</span>
+            </h2>
+            <p className="text-neutral-600 text-lg sm:text-xl max-w-2xl">
+              Get started in three simple steps
+            </p>
           </div>
-          <div className="mt-12 text-center">
-            <button className="px-8 py-3 bg-[#D91656] text-white transform hover:translate-y-[-2px] transition-all border-2 border-[#03051E] text-lg">
+
+          <div className="relative">
+            {/* Progress Line */}
+            <div className="absolute left-8 sm:left-1/2 top-0 bottom-0 w-1 bg-neutral-200 hidden sm:block" />
+
+            {/* Steps */}
+            <div className="space-y-12 sm:space-y-24">
+              {howItWorks.map((item, index) => (
+                <div key={item.step} className="relative">
+                  {/* Step Number Circle - Mobile */}
+                  <div className="absolute left-4 top-0 w-8 h-8 rounded-full bg-[#D91656] text-white flex items-center justify-center text-sm font-bold sm:hidden">
+                    {item.step}
+                  </div>
+
+                  <motion.div
+                    initial={{
+                      opacity: 0,
+                      x: item.align === "left" ? -20 : 20,
+                    }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.2 }}
+                    className={`ml-16 sm:ml-0 relative sm:w-1/2 ${
+                      item.align === "right" ? "sm:ml-auto" : "sm:mr-auto"
+                    } ${item.align === "left" ? "sm:pr-16" : "sm:pl-16"}`}
+                  >
+                    {/* Step Number Circle - Desktop */}
+                    <div
+                      className={`hidden sm:flex absolute top-0 w-12 h-12 rounded-full bg-[#D91656] text-white items-center justify-center text-lg font-bold ${
+                        item.align === "left" ? "right-10" : "left-10"
+                      } transform -translate-y-1/4`}
+                    >
+                      {item.step}
+                    </div>
+
+                    {/* Content Card */}
+                    <div className="relative group">
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#D91656]/10 to-transparent rounded-2xl transform group-hover:scale-105 transition-all duration-300" />
+                      <div className="relative p-6 sm:p-8">
+                        <div className="flex flex-col gap-4">
+                          <span className="text-4xl sm:text-5xl">
+                            {item.icon}
+                          </span>
+                          <div>
+                            <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-2">
+                              {item.title}
+                            </h3>
+                            <p className="text-neutral-600 leading-relaxed">
+                              {item.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-16 text-center">
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="px-8 py-3 bg-[#D91656] text-white transform hover:translate-y-[-2px] transition-all border-2 border-[#03051E] text-lg rounded-xl"
+            >
               Get Started Now
-            </button>
+            </motion.button>
           </div>
         </div>
 
