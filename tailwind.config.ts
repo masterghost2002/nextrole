@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-export default {
+const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,6 +8,15 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        pixel: ["var(--font-silkscreen)"],
+        terminal: ["var(--font-vt323)"],
+        mono: ["var(--font-ibm-plex)"],
+      },
+      boxShadow: {
+        retro: "4px 4px 0px 0px rgba(0,0,0,0.9)",
+        "retro-sm": "2px 2px 0px 0px rgba(0,0,0,0.9)",
+      },
       // Custom Color Palette
       colors: {
         // Neutral shades (based on #03051E)
@@ -70,3 +79,5 @@ export default {
   },
   plugins: [],
 } satisfies Config;
+
+export default config;

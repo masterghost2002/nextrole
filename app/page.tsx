@@ -188,8 +188,8 @@ export default function Home() {
         {/* Section 3: Testimonials  */}
         <div className="py-12 sm:py-20">
           <div className="space-y-4 mb-12 sm:mb-16">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-900">
-              What Our <span className="text-[#D91656]">Users</span> Say
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900 leading-normal">
+              USER<span className="text-[#D91656]">.STORIES</span>()
             </h2>
             <p className="text-neutral-600 text-lg sm:text-xl max-w-2xl">
               Real stories from professionals who've found success with

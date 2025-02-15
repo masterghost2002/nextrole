@@ -1,15 +1,26 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Silkscreen, VT323, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Silkscreen - Perfect for main headings, very retro pixel font
+const silkscreen = Silkscreen({
+  weight: ["400", "700"],
   subsets: ["latin"],
+  variable: "--font-silkscreen",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// VT323 - Great for subheadings and buttons, classic terminal style
+const vt323 = VT323({
+  weight: "400",
   subsets: ["latin"],
+  variable: "--font-vt323",
+});
+
+// IBM Plex Mono - Clean monospace for inputs and body text
+const ibmPlexMono = IBM_Plex_Mono({
+  weight: ["400", "500", "600"],
+  subsets: ["latin"],
+  variable: "--font-ibm-plex",
 });
 
 export const metadata: Metadata = {
@@ -60,7 +71,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${silkscreen.variable} ${vt323.variable} ${ibmPlexMono.variable} font-mono antialiased`}
       >
         {children}
       </body>
