@@ -12,11 +12,11 @@ export default function Home() {
             Next<span className="text-[#D91656]">Role</span>
             <div className="absolute -bottom-2 left-0 w-0 h-1 bg-[#D91656] group-hover:w-full transition-all duration-300"></div>
           </div>
-          <SignUpButton>Sign Up</SignUpButton>
+          <SignUpButton className="w-[120px]">Sign Up</SignUpButton>
         </nav>
 
         {/* Section 1: Hero Section */}
-        <div className="py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -33,10 +33,10 @@ export default function Home() {
               anonymously.
             </p>
             <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-4">
-              <SignUpButton className="w-full sm:w-auto">
+              <SignUpButton className="w-full">
                 Sign Up with Google
               </SignUpButton>
-              <LoginButton className="w-full sm:w-auto">Log In</LoginButton>
+              <LoginButton className="w-full">Log In</LoginButton>
             </div>
             <div className="flex flex-wrap gap-4 text-sm text-gray-600">
               <span>✓ Anonymous Posting</span>
@@ -186,7 +186,7 @@ export default function Home() {
         </div>
 
         {/* Section 3: Testimonials  */}
-        <div className="py-12 sm:py-20">
+        <div className="py-6 md:py-12 sm:py-20">
           <div className="space-y-4 mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900 leading-normal">
               USER<span className="text-[#D91656]">.STORIES</span>()
@@ -242,7 +242,7 @@ export default function Home() {
         </div>
 
         {/* Section 4: How It Works - Revamped */}
-        <div className="py-12 sm:py-20">
+        <div className="py-6 md:py-">
           <div className="space-y-4 mb-12 sm:mb-16">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-900">
               How It <span className="text-[#D91656]">Works</span>
@@ -311,14 +311,9 @@ export default function Home() {
           </div>
 
           <div className="mt-16 text-center">
-            <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-              className="px-8 py-3 bg-[#D91656] text-white transform hover:translate-y-[-2px] transition-all border-2 border-[#03051E] text-lg rounded-xl"
-            >
+            <SignUpButton className="w-full md:w-[200px]">
               Get Started Now
-            </motion.button>
+            </SignUpButton>
           </div>
         </div>
 
