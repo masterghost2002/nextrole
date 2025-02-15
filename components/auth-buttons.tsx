@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { ButtonHTMLAttributes } from "react";
-
+import { signinWithGoogle } from "@/actions/auth";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
@@ -18,6 +18,7 @@ export const SignUpButton = ({
         className
       )}
       {...props}
+      onClick={signinWithGoogle}
     >
       {children}
     </button>
