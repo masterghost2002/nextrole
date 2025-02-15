@@ -23,6 +23,10 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-ibm-plex",
 });
 
+export const viewport = {
+  themeColor: "#00ff00",
+};
+
 export const metadata: Metadata = {
   title: "NextRole | Your Next Role, Revealed",
   description:
@@ -60,7 +64,6 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  themeColor: "#D91656",
 };
 
 export default function RootLayout({
