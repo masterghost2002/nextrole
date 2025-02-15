@@ -2,6 +2,9 @@
 import { motion } from "framer-motion";
 import { testimonials, howItWorks } from "@/constant/landing-page";
 import { SignUpButton, LoginButton } from "@/components/auth-buttons";
+import { SearchCheck, ShieldCheck, Infinity, VenetianMask } from "lucide-react";
+import React from "react";
+
 export default function Home() {
   return (
     <main className="bg-[#F7F7F7] min-h-screen">
@@ -54,12 +57,22 @@ export default function Home() {
             <div className="absolute -z-10 w-72 h-72 bg-[#D91656] rounded-full opacity-10 blur-3xl right-0 top-0"></div>
             <div className="border-4 border-[#03051E] rounded-3xl p-8 bg-white">
               <div className="grid grid-cols-2 gap-4">
-                {[1, 2, 3, 4].map((i) => (
+                {[
+                  <SearchCheck key="search" />,
+                  <ShieldCheck key="shield" />,
+                  <Infinity key="infinity" />,
+                  <VenetianMask key="venetian" />,
+                ].map((icon, i) => (
                   <div
                     key={i}
                     className="bg-[#F7F7F7] p-4 rounded-xl border border-gray-200"
                   >
-                    <div className="w-full h-24 rounded-lg bg-gradient-to-br from-[#D91656]/10 to-[#03051E]/10"></div>
+                    <div className="w-full h-24 rounded-lg bg-gradient-to-br from-[#D91656]/10 to-[#03051E]/10 flex items-center justify-center">
+                      {React.cloneElement(icon, {
+                        className: "w-8 h-8 md:w-12 md:h-12 text-[#D91656]",
+                        strokeWidth: 1.5,
+                      })}
+                    </div>
                   </div>
                 ))}
               </div>
