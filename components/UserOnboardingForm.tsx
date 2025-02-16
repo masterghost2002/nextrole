@@ -9,7 +9,10 @@ import {
 import Image from "next/image";
 import { useUserOnboarding } from "@/lib/hooks/mutations/useUser";
 
-export default function UserOnboardingForm() {
+type TProps = {
+  email: string;
+};
+export default function UserOnboardingForm({ email }: TProps) {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const {
@@ -19,6 +22,9 @@ export default function UserOnboardingForm() {
     watch,
   } = useForm<UserOnboardingInput>({
     resolver: zodResolver(userOnboardingSchema),
+    defaultValues: {
+      email,
+    },
   });
 
   const mutation = useUserOnboarding();
