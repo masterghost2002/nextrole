@@ -14,5 +14,5 @@ export default async function OnboardingPage() {
   }
 
   if (user) return redirect("/home");
-  return <UserOnboardingForm email={data.user.email || ""} />;
+  return <UserOnboardingForm />;
 }

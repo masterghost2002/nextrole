@@ -9,7 +9,6 @@ const ACCEPTED_IMAGE_TYPES = [
 ];
 
 export const userOnboardingSchema = z.object({
-  fullName: z.string().min(2, "Name must be at least 2 characters"),
   username: z
     .string()
     .min(3, "Username must be at least 3 characters")
@@ -17,20 +16,23 @@ export const userOnboardingSchema = z.object({
       /^[a-zA-Z0-9_-]+$/,
       "Username can only contain letters, numbers, - and _"
     ),
-  nickname: z.string().optional(),
-  email: z.string().email("Invalid email address"),
+  nickname: z.string({
+    required_error: "Nickname is required",
+  }),
   dob: z.date({
     required_error: "Please select a date of birth",
   }),
-  company: z.string().optional(),
-  profilePicture: z
-    .any()
-    // // .refine((file) => file?.size <= MAX_FILE_SIZE, "Max file size is 5MB")
-    // .refine(
-    //   (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-    //   "Only .jpg, .jpeg, .png and .webp formats are supported"
-    // )
-    .optional(),
+  company: z.string({
+    required_error: "Company is required",
+  }),
+  avatarId: z.string({
+    required_error: "Please select an avatar",
+  }),
+  yearsOfExperience: z
+    .number({
+      required_error: "Years of experience is required",
+    })
+    .min(0, "Years of experience must be 0 or greater"),
 });
 
 export type UserOnboardingInput = z.infer<typeof userOnboardingSchema>;
