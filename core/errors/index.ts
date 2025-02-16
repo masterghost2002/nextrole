@@ -1,4 +1,5 @@
 // Base custom error class
+export * from "./handler";
 export class BaseError extends Error {
   constructor(
     public message: string,

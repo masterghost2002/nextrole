@@ -1,5 +1,6 @@
-import { UnauthorizedError } from "../errors";
-
+import { UnauthorizedError } from "@/core/errors";
+import { createClient } from "@/lib/supabase";
+import DB from "@/core/db";
 /**
  * Basic authentication decorator
  * Ensures the user has completed initial authentication (e.g., Google OAuth)
@@ -20,10 +21,21 @@ export function auth() {
   ) {
     const originalMethod = descriptor.value;
 
-    descriptor.value = function (...args: any[]) {
-      const request = args[0];
+    descriptor.value = async function (...args: any[]) {
+      const supabase = await createClient();
+      const { data, error } = await supabase.auth.getUser();
+      if (error) {
+        throw new UnauthorizedError("Authentication required");
+      }
 
-      if (!request.user) {
+      if (!data.user) {
+        throw new UnauthorizedError("Authentication required");
+      }
+
+      const db = await DB.getInstance();
+      const user = await db.user.getUserByEmail(data.user.email || "");
+
+      if (!user) {
         throw new UnauthorizedError("Authentication required");
       }
 
@@ -56,15 +68,16 @@ export function basicAuth() {
   ) {
     const originalMethod = descriptor.value;
 
-    descriptor.value = function (...args: any[]) {
-      const request = args[0];
+    descriptor.value = async function (...args: any[]) {
+      const supabase = await createClient();
+      const { data, error } = await supabase.auth.getUser();
 
-      if (!request.user) {
+      if (error) {
         throw new UnauthorizedError("Authentication required");
       }
 
-      if (!request.user.isOnboarded) {
-        throw new UnauthorizedError("Account verification required");
+      if (!data.user) {
+        throw new UnauthorizedError("Authentication required");
       }
 
       return originalMethod.apply(this, args);
