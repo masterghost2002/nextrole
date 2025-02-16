@@ -25,11 +25,11 @@ export const userOnboardingSchema = z.object({
   company: z.string().optional(),
   profilePicture: z
     .any()
-    .refine((file) => file?.size <= MAX_FILE_SIZE, "Max file size is 5MB")
-    .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      "Only .jpg, .jpeg, .png and .webp formats are supported"
-    )
+    // // .refine((file) => file?.size <= MAX_FILE_SIZE, "Max file size is 5MB")
+    // .refine(
+    //   (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+    //   "Only .jpg, .jpeg, .png and .webp formats are supported"
+    // )
     .optional(),
 });
 

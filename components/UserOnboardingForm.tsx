@@ -7,6 +7,7 @@ import {
   userOnboardingSchema,
 } from "@/lib/validations/user-schema";
 import Image from "next/image";
+import { useUserOnboarding } from "@/lib/hooks/mutations/useUser";
 
 export default function UserOnboardingForm() {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -20,9 +21,15 @@ export default function UserOnboardingForm() {
     resolver: zodResolver(userOnboardingSchema),
   });
 
+  const mutation = useUserOnboarding();
+
   const onSubmit = async (data: UserOnboardingInput) => {
-    // Handle form submission
     console.log(data);
+    try {
+      await mutation.mutateAsync(data);
+    } catch (error) {
+      console.error("Submission failed:", error);
+    }
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

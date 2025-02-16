@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Silkscreen, VT323, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import { Providers } from "@/providers";
 
 // Silkscreen - Perfect for main headings, very retro pixel font
 const silkscreen = Silkscreen({
@@ -76,7 +77,7 @@ export default function RootLayout({
       <body
         className={`${silkscreen.variable} ${vt323.variable} ${ibmPlexMono.variable} font-mono antialiased`}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
