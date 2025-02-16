@@ -13,6 +13,7 @@ export const withErrorHandling = (handler: ApiHandler): ApiHandler => {
           {
             error: error.message,
             code: error.code,
+            data: error.data,
           },
           { status: error.statusCode }
         );
