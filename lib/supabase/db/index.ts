@@ -6,8 +6,8 @@ import { Avatar } from "./avatar";
 
 export default class DB {
   private static instance: DB;
-  private user: User;
-  private avatar: Avatar;
+  public user: User;
+  public avatar: Avatar;
 
   private constructor(protected supabase: SupabaseClient<Database>) {
     this.supabase = supabase;
