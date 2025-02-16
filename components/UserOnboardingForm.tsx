@@ -8,7 +8,7 @@ import {
 } from "@/lib/validations/user-schema";
 import { useUserOnboarding } from "@/lib/hooks/mutations/useUser";
 import { AvatarSelector } from "@/components/avatar-selector";
-
+import { Button } from "@/components/ui/button";
 export default function UserOnboardingForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -138,10 +138,10 @@ export default function UserOnboardingForm() {
             </div>
           </div>
 
-          <button
+          <Button
             type="submit"
+            variant="primary"
             disabled={isSubmitting || mutation.isPending}
-            className="w-full bg-[#D91656] hover:bg-[#D91656]/90 text-white py-3 rounded shadow-retro font-bold disabled:opacity-50 disabled:cursor-not-allowed mt-8"
           >
             {isSubmitting || mutation.isPending ? (
               <span className="flex items-center justify-center gap-2">
@@ -150,7 +150,7 @@ export default function UserOnboardingForm() {
             ) : (
               "Create Profile"
             )}
-          </button>
+          </Button>
         </form>
       </div>
     </div>

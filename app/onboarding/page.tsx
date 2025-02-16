@@ -9,10 +9,10 @@ export default async function OnboardingPage() {
   const db = await DB.getInstance();
   const user = await db.user.getUserByEmail(data.user?.email || "");
 
-  if (!data.user || error) {
-    return redirect("/");
-  }
+  // if (!data.user || error) {
+  //   return redirect("/");
+  // }
 
-  if (user) return redirect("/home");
+  // if (user) return redirect("/home");
   return <UserOnboardingForm />;
 }

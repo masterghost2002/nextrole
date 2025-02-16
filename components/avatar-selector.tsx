@@ -7,6 +7,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui";
+import { Button } from "./ui/button";
 
 export type AvatarOption = {
   id: string;
@@ -59,9 +60,13 @@ export function AvatarSelector({
                 </AvatarFallback>
               )}
             </Avatar>
-            <button className="mt-4 bg-[#D91656] hover:bg-[#D91656]/90">
+            <Button
+              type="button"
+              variant="secondary"
+              className="py-2 mt-2 px-3"
+            >
               Select Avatar
-            </button>
+            </Button>
           </div>
         </DialogTrigger>
         <DialogContent className="max-w-3xl">
