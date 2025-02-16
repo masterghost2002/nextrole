@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase";
-import DB from "@/lib/supabase/db";
+import DB from "@/core/db";
 import { redirect } from "next/navigation";
 
 export default async function ProtectedLayout({
