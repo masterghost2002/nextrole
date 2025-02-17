@@ -1,29 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
-
-export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json();
-
-    console.log(body);
-    // Validate required fields
-    if (!body.name || !body.email) {
-      return NextResponse.json(
-        { error: "Name and email are required" },
-        { status: 400 }
-      );
-    }
-
-    // TODO: Add your form processing logic here
-    // For example: saving to database, sending confirmation email, etc.
-
-    return NextResponse.json(
-      { message: "User onboarded successfully" },
-      { status: 201 }
-    );
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to process request" },
-      { status: 500 }
-    );
-  }
-}
+import { withErrorHandling } from "@/core";
+import { NextResponse } from "next/server";
+import { UserController } from "@/core/controller/user";
+const userController = new UserController();
+export const POST = withErrorHandling(async (request: Request) => {
+  const body = await request.json();
+  const response = await userController.createUser(body);
+  return NextResponse.json(response);
+});
