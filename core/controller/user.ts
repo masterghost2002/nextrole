@@ -1,9 +1,10 @@
 import { CreateUserSchema } from "@/core/dto";
 import { BadRequestError } from "@/core/errors";
-import { basicAuth } from "../decorators";
+import { basicAuth, InjectDB } from "../decorators";
 import type { CreateUserDto } from "@/core/dto";
-import DB from "../db";
+@InjectDB()
 export class UserController {
+  private db!: Promise<DB>;
   constructor() {}
   @basicAuth()
   async createUser(user: CreateUserDto, email?: string) {
@@ -19,7 +20,7 @@ export class UserController {
         data: validatedUser.error,
       });
     }
-    const db = await DB.getInstance();
+    const db = await this.db;
     const parsedUser = validatedUser.data;
     const userData = {
       email: email,

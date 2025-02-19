@@ -1,4 +1,3 @@
-import DB from "@/core/db";
 import { InjectDB, basicAuth } from "@/core/decorators";
 @InjectDB()
 export class AvatarController {

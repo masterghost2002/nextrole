@@ -1,6 +1,6 @@
 import { withErrorHandling } from "@/core";
 import { NextResponse } from "next/server";
-import { UserController } from "@/core/controller/user";
+import { UserController } from "@/core/controller";
 const userController = new UserController();
 export const POST = withErrorHandling(async (request: Request) => {
   const body = await request.json();

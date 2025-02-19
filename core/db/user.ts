@@ -1,7 +1,5 @@
 import { SupabaseClient } from "@supabase/supabase-js";
-import type { Database } from "@/types/supabase";
-import type { CreateUserDto } from "@/core/dto";
-type TUser = Database["public"]["Tables"]["users"]["Row"];
+type TUser = DatabaseSchema["public"]["Tables"]["users"]["Row"];
 type TCreateUser = Pick<
   TUser,
   | "email"
@@ -39,14 +37,14 @@ function getUserBy(key: string) {
 }
 
 export class User {
-  constructor(protected supabase: SupabaseClient<Database>) {
+  constructor(protected supabase: SupabaseClient<DatabaseSchema>) {
     this.supabase = supabase;
   }
 
   @getUserBy("email")
   async getUserByEmail(
     email: string
-  ): Promise<Database["public"]["Tables"]["users"]["Row"] | null> {
+  ): Promise<DatabaseSchema["public"]["Tables"]["users"]["Row"] | null> {
     // Method implementation will be replaced by decorator
     return null;
   }
