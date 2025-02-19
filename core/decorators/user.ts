@@ -59,8 +59,7 @@ export function auth() {
  *
  * @throws {UnauthorizedError} If user is not authenticated
  * @throws {UnauthorizedError} If user has not completed verification
- */
-export function basicAuth() {
+ */ export function basicAuth() {
   return function (
     target: any,
     propertyKey: string,
@@ -72,14 +71,14 @@ export function basicAuth() {
       const supabase = await createClient();
       const { data, error } = await supabase.auth.getUser();
 
-      if (error) {
+      if (error || !data.user) {
         throw new UnauthorizedError("Authentication required");
       }
 
-      if (!data.user) {
-        throw new UnauthorizedError("Authentication required");
-      }
+      // Add the user's email to the method's arguments
+      args.push(data.user.email);
 
+      // Call the original method with the updated arguments
       return originalMethod.apply(this, args);
     };
 

@@ -1,5 +1,17 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/types/supabase";
+import type { CreateUserDto } from "@/core/dto";
+type TUser = Database["public"]["Tables"]["users"]["Row"];
+type TCreateUser = Pick<
+  TUser,
+  | "email"
+  | "username"
+  | "bio"
+  | "dob"
+  | "yoe"
+  | "current_company_id"
+  | "current_position"
+>;
 
 // Decorator factory
 function getUserBy(key: string) {
@@ -37,5 +49,18 @@ export class User {
   ): Promise<Database["public"]["Tables"]["users"]["Row"] | null> {
     // Method implementation will be replaced by decorator
     return null;
+  }
+
+  async createUser(user: TCreateUser) {
+    const { data, error } = await this.supabase
+      .from("users")
+      .insert(user)
+      .select();
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data;
   }
 }
