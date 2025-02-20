@@ -44,8 +44,8 @@ export default function UserOnboardingForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white p-4 md:p-8">
-      <div className="w-full max-w-2xl bg-white p-6 md:p-8 rounded-lg shadow-md">
+    <div className="min-h-screen flex items-center justify-center bg-white p-2 md:p-8">
+      <div className="w-full max-w-2xl bg-white p-6 md:p-8 md:rounded-lg md:shadow-md">
         <h1 className="text-2xl md:text-3xl font-bold text-[#03051E] mb-6 text-center">
           Create Your Profile
         </h1>
@@ -84,32 +84,31 @@ export default function UserOnboardingForm() {
                 type: "date",
                 required: true,
               },
-              {
-                label: "Company (Optional)",
-                name: "currentCompany",
-                type: "text",
-              },
-              {
-                label: "Years of Experience",
-                name: "yearsOfExperience",
-                type: "number",
-                required: true,
-                min: 0,
-              },
+              // {
+              //   label: "Company (Optional)",
+              //   name: "currentCompany",
+              //   type: "text",
+              // },
+              // {
+              //   label: "Years of Experience",
+              //   name: "yearsOfExperience",
+              //   type: "number",
+              //   required: true,
+              //   min: 0,
+              // },
               {
                 label: "Current Role (Optional)",
                 name: "currentRole",
                 type: "text",
               },
-            ].map(({ label, name, type, required, min }) => (
+            ].map(({ label, name, type, required }) => (
               <div key={name} className="space-y-2">
                 <label className="block font-bold text-[#03051E]">
                   {label}
                 </label>
                 <input
                   type={type}
-                  min={min}
-                  className="w-full px-4 py-2 border-2 border-neutral-200 rounded focus:border-[#D91656] focus:outline-none"
+                  className="w-full px-4 py-2 border-2 text-black border-neutral-200 rounded focus:border-[#D91656] focus:outline-none"
                   {...register(
                     name as keyof UserOnboardingInput,
                     type === "number" ? { valueAsNumber: true } : {}
@@ -126,11 +125,9 @@ export default function UserOnboardingForm() {
 
           {/* Bio Field */}
           <div className="space-y-2">
-            <label className="block font-bold text-[#03051E]">
-              Bio (Optional)
-            </label>
+            <label className="block font-bold text-[#03051E]">Bio</label>
             <textarea
-              className="w-full px-4 py-2 border-2 border-neutral-200 rounded focus:border-[#D91656] focus:outline-none"
+              className="w-full px-4 py-2 border-2 text-black border-neutral-200 rounded focus:border-[#D91656] focus:outline-none"
               {...register("bio")}
               rows={4}
             />
