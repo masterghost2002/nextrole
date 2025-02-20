@@ -7,6 +7,9 @@ export async function GET(request: NextRequest) {
   const code = searchParams.get("code");
   // if "next" is in param, use it as the redirect URL
   const next = searchParams.get("next") ?? "/";
+  console.log("next", next);
+  console.log("origin", origin);
+  console.log("code", code);
 
   if (!code) {
     return NextResponse.redirect(`${origin}/404`);
@@ -24,15 +27,16 @@ export async function GET(request: NextRequest) {
     .select("*")
     .eq("email", data.user.email)
     .single();
-  if (!userFromDatabase.data) return NextResponse.redirect(`${origin}/onboard`);
+  if (!userFromDatabase.data)
+    return NextResponse.redirect(`${origin}/onboarding`);
 
-  const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
-  const isLocalEnv = process.env.NODE_ENV === "development";
-  if (isLocalEnv) {
-    // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host
-    return NextResponse.redirect(`${origin}${next}`);
-  } else if (forwardedHost) {
-    return NextResponse.redirect(`https://${forwardedHost}${next}`);
-  }
+  // const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
+  // const isLocalEnv = process.env.NODE_ENV === "development";
+  // if (isLocalEnv) {
+  //   // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host
+  //   return NextResponse.redirect(`${origin}${next}`);
+  // } else if (forwardedHost) {
+  //   return NextResponse.redirect(`https://${forwardedHost}${next}`);
+  // }
   return NextResponse.redirect(`${origin}${next}`);
 }
