@@ -25,7 +25,7 @@ export const userOnboardingSchema = z.object({
   company: z.string({
     required_error: "Company is required",
   }),
-  avatarId: z.string({
+  avatarId: z.number({
     required_error: "Please select an avatar",
   }),
   yearsOfExperience: z

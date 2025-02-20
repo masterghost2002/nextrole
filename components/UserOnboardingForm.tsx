@@ -38,7 +38,7 @@ export default function UserOnboardingForm() {
     }
   };
 
-  const handleAvatarSelect = (avatarId: string) => {
+  const handleAvatarSelect = (avatarId: number) => {
     setValue("avatarId", avatarId);
   };
 
@@ -58,7 +58,7 @@ export default function UserOnboardingForm() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Profile Picture Upload */}
           <AvatarSelector
-            selectedAvatarId={watch("avatarId") as string}
+            selectedAvatarId={watch("avatarId")}
             onAvatarSelect={handleAvatarSelect}
             error={errors.avatarId?.message as string}
           />

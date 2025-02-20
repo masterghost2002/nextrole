@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui";
 import { Button } from "./ui/button";
+import { useAvatarQuery } from "@/lib/hooks/query";
 
 export type AvatarOption = {
   id: string;
@@ -16,17 +17,10 @@ export type AvatarOption = {
 };
 
 interface AvatarSelectorProps {
-  selectedAvatarId: string | null;
-  onAvatarSelect: (avatarId: string) => void;
+  selectedAvatarId: number | null;
+  onAvatarSelect: (avatarId: number) => void;
   error?: string;
 }
-
-const avatarOptions: AvatarOption[] = [
-  { id: "avatar1", url: "/avatars/1.png", alt: "Cool Avatar" },
-  { id: "avatar2", url: "/avatars/2.png", alt: "Fun Avatar" },
-  { id: "avatar3", url: "/avatars/3.png", alt: "Serious Avatar" },
-  // Add more avatars as needed
-];
 
 export function AvatarSelector({
   selectedAvatarId,
@@ -34,14 +28,18 @@ export function AvatarSelector({
   error,
 }: AvatarSelectorProps) {
   const [open, setOpen] = useState(false);
-  const selectedAvatar = avatarOptions.find(
-    (avatar) => avatar.id === selectedAvatarId
-  );
 
-  const handleAvatarSelect = (avatar: AvatarOption) => {
+  const handleAvatarSelect = (
+    avatar: DatabaseSchema["public"]["Tables"]["avatars"]["Row"]
+  ) => {
     onAvatarSelect(avatar.id);
     setOpen(false);
   };
+
+  const avatars = useAvatarQuery();
+  const selectedAvatar = avatars.find(
+    (avatar) => avatar.id === selectedAvatarId
+  );
 
   return (
     <div className="flex flex-col items-center mb-6">
@@ -52,7 +50,7 @@ export function AvatarSelector({
               {selectedAvatar ? (
                 <AvatarImage
                   src={selectedAvatar.url}
-                  alt={selectedAvatar.alt}
+                  alt={selectedAvatar.name}
                 />
               ) : (
                 <AvatarFallback className="bg-neutral-100 text-neutral-400">
@@ -74,7 +72,7 @@ export function AvatarSelector({
             <DialogTitle>Choose your avatar</DialogTitle>
           </DialogHeader>
           <div className="grid grid-cols-3 md:grid-cols-4 gap-4 p-4">
-            {avatarOptions.map((avatar) => (
+            {avatars.map((avatar) => (
               <div
                 key={avatar.id}
                 className={`cursor-pointer transition-all ${
@@ -85,7 +83,7 @@ export function AvatarSelector({
                 onClick={() => handleAvatarSelect(avatar)}
               >
                 <Avatar className="w-24 h-24">
-                  <AvatarImage src={avatar.url} alt={avatar.alt} />
+                  <AvatarImage src={avatar.url} alt={avatar.name} />
                   <AvatarFallback>Avatar</AvatarFallback>
                 </Avatar>
               </div>
