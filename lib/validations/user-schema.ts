@@ -1,13 +1,4 @@
 import { z } from "zod";
-
-const MAX_FILE_SIZE = 5000000; // 5MB
-const ACCEPTED_IMAGE_TYPES = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "image/webp",
-];
-
 export const userOnboardingSchema = z.object({
   username: z
     .string()
@@ -19,12 +10,10 @@ export const userOnboardingSchema = z.object({
   nickname: z.string({
     required_error: "Nickname is required",
   }),
-  dob: z.date({
+  dob: z.string({
     required_error: "Please select a date of birth",
   }),
-  company: z.string({
-    required_error: "Company is required",
-  }),
+  currentCompany: z.string().optional(),
   avatarId: z.number({
     required_error: "Please select an avatar",
   }),
@@ -33,6 +22,8 @@ export const userOnboardingSchema = z.object({
       required_error: "Years of experience is required",
     })
     .min(0, "Years of experience must be 0 or greater"),
+  currentRole: z.string().optional(),
+  bio: z.string().optional(),
 });
 
 export type UserOnboardingInput = z.infer<typeof userOnboardingSchema>;

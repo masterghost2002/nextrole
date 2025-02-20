@@ -9,6 +9,7 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui";
 import { Button } from "./ui/button";
 import { useAvatarQuery } from "@/lib/hooks/query";
+import { Loader2 } from "lucide-react";
 
 export type AvatarOption = {
   id: string;
@@ -21,6 +22,14 @@ interface AvatarSelectorProps {
   onAvatarSelect: (avatarId: number) => void;
   error?: string;
 }
+
+const Loading = () => {
+  return (
+    <div className="flex justify-center items-center h-full">
+      <Loader2 className="w-4 h-4 animate-spin" />
+    </div>
+  );
+};
 
 export function AvatarSelector({
   selectedAvatarId,
@@ -36,7 +45,7 @@ export function AvatarSelector({
     setOpen(false);
   };
 
-  const avatars = useAvatarQuery();
+  const { data: avatars = [], isLoading } = useAvatarQuery();
   const selectedAvatar = avatars.find(
     (avatar) => avatar.id === selectedAvatarId
   );
@@ -72,6 +81,7 @@ export function AvatarSelector({
             <DialogTitle>Choose your avatar</DialogTitle>
           </DialogHeader>
           <div className="grid grid-cols-3 md:grid-cols-4 gap-4 p-4">
+            {isLoading && <Loading />}
             {avatars.map((avatar) => (
               <div
                 key={avatar.id}

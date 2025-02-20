@@ -9,6 +9,7 @@ import {
 import { useUserOnboarding } from "@/lib/hooks/mutations/useUser";
 import { AvatarSelector } from "@/components/avatar-selector";
 import { Button } from "@/components/ui/button";
+
 export default function UserOnboardingForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -43,105 +44,103 @@ export default function UserOnboardingForm() {
   };
 
   return (
-    <div className="min-h-screen bg-white p-2 md:p-8">
-      <div className="max-w-2xl mx-auto bg-white p-4 md:p-8 rounded-lg md:shadow-retro">
-        <h1 className="text-2xl md:text-3xl font-black text-[#03051E] mb-8">
+    <div className="min-h-screen flex items-center justify-center bg-white p-4 md:p-8">
+      <div className="w-full max-w-2xl bg-white p-6 md:p-8 rounded-lg shadow-md">
+        <h1 className="text-2xl md:text-3xl font-bold text-[#03051E] mb-6 text-center">
           Create Your Profile
         </h1>
 
         {submitError && (
-          <div className="mb-4 p-4 bg-red-50 border border-red-200 text-red-600 rounded">
+          <div className="mb-4 p-4 bg-red-100 border border-red-300 text-red-600 rounded">
             {submitError}
           </div>
         )}
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {/* Profile Picture Upload */}
+          {/* Avatar Selection */}
           <AvatarSelector
             selectedAvatarId={watch("avatarId")}
             onAvatarSelect={handleAvatarSelect}
             error={errors.avatarId?.message as string}
           />
 
-          {/* Form Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label className="block font-bold text-[#03051E]">Username</label>
-              <input
-                type="text"
-                className="w-full px-4 py-2 border-2 border-neutral-200 rounded focus:border-[#D91656] focus:outline-none"
-                {...register("username")}
-              />
-              {errors.username && (
-                <p className="text-[#D91656] text-sm">
-                  {errors.username.message}
-                </p>
-              )}
-            </div>
+            {[
+              {
+                label: "Username",
+                name: "username",
+                type: "text",
+                required: true,
+              },
+              {
+                label: "Nickname",
+                name: "nickname",
+                type: "text",
+                required: true,
+              },
+              {
+                label: "Date of Birth",
+                name: "dob",
+                type: "date",
+                required: true,
+              },
+              {
+                label: "Company (Optional)",
+                name: "currentCompany",
+                type: "text",
+              },
+              {
+                label: "Years of Experience",
+                name: "yearsOfExperience",
+                type: "number",
+                required: true,
+                min: 0,
+              },
+              {
+                label: "Current Role (Optional)",
+                name: "currentRole",
+                type: "text",
+              },
+            ].map(({ label, name, type, required, min }) => (
+              <div key={name} className="space-y-2">
+                <label className="block font-bold text-[#03051E]">
+                  {label}
+                </label>
+                <input
+                  type={type}
+                  min={min}
+                  className="w-full px-4 py-2 border-2 border-neutral-200 rounded focus:border-[#D91656] focus:outline-none"
+                  {...register(
+                    name as keyof UserOnboardingInput,
+                    type === "number" ? { valueAsNumber: true } : {}
+                  )}
+                />
+                {errors[name as keyof UserOnboardingInput] && (
+                  <p className="text-[#D91656] text-sm">
+                    {errors[name as keyof UserOnboardingInput]?.message}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
 
-            <div className="space-y-2">
-              <label className="block font-bold text-[#03051E]">
-                Nickname (Optional)
-              </label>
-              <input
-                type="text"
-                className="w-full px-4 py-2 border-2 border-neutral-200 rounded focus:border-[#D91656] focus:outline-none"
-                {...register("nickname")}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="block font-bold text-[#03051E]">
-                Date of Birth
-              </label>
-              <input
-                type="date"
-                className="w-full px-4 py-2 border-2 border-neutral-200 rounded focus:border-[#D91656] focus:outline-none"
-                {...register("dob", { valueAsDate: true })}
-              />
-              {errors.dob && (
-                <p className="text-[#D91656] text-sm">{errors.dob.message}</p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <label className="block font-bold text-[#03051E]">
-                Current Company (Optional)
-              </label>
-              <input
-                type="text"
-                className="w-full px-4 py-2 border-2 border-neutral-200 rounded focus:border-[#D91656] focus:outline-none"
-                {...register("company")}
-              />
-              {errors.company && (
-                <p className="text-[#D91656] text-sm">
-                  {errors.company.message}
-                </p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <label className="block font-bold text-[#03051E]">
-                Years of Experience
-              </label>
-              <input
-                type="number"
-                min="0"
-                className="w-full px-4 py-2 border-2 border-neutral-200 rounded focus:border-[#D91656] focus:outline-none"
-                {...register("yearsOfExperience", { valueAsNumber: true })}
-              />
-              {errors.yearsOfExperience && (
-                <p className="text-[#D91656] text-sm">
-                  {errors.yearsOfExperience.message}
-                </p>
-              )}
-            </div>
+          {/* Bio Field */}
+          <div className="space-y-2">
+            <label className="block font-bold text-[#03051E]">
+              Bio (Optional)
+            </label>
+            <textarea
+              className="w-full px-4 py-2 border-2 border-neutral-200 rounded focus:border-[#D91656] focus:outline-none"
+              {...register("bio")}
+              rows={4}
+            />
           </div>
 
           <Button
             type="submit"
             variant="primary"
             disabled={isSubmitting || mutation.isPending}
+            className="w-full"
           >
             {isSubmitting || mutation.isPending ? (
               <span className="flex items-center justify-center gap-2">
