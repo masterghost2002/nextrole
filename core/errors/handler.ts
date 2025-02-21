@@ -1,10 +1,14 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { BaseError } from "@/core/errors";
 
-type ApiHandler = (req: Request) => Promise<NextResponse>;
+type ApiHandler<T extends Request | NextRequest> = (
+  req: T
+) => Promise<NextResponse>;
 
-export const withErrorHandling = (handler: ApiHandler): ApiHandler => {
-  return async (req: Request) => {
+export const withErrorHandling = <T extends Request | NextRequest>(
+  handler: ApiHandler<T>
+): ApiHandler<T> => {
+  return async (req: T) => {
     try {
       return await handler(req);
     } catch (error: any) {

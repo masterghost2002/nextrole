@@ -48,6 +48,10 @@ export class User {
     // Method implementation will be replaced by decorator
     return null;
   }
+  @getUserBy("username")
+  async getUserByUsername(username: string): Promise<TUser | null> {
+    return null;
+  }
 
   async createUser(user: TCreateUser) {
     const { data, error } = await this.supabase

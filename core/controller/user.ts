@@ -34,4 +34,16 @@ export class UserController {
     const response = await db.user.createUser(userData);
     return response;
   }
+  @basicAuth()
+  async isUsernameAvailable(username: string | null) {
+    if (!username) {
+      throw new BadRequestError("Username is required");
+    }
+    if (username.trim().length <= 3) {
+      throw new BadRequestError("Username must be at least 3 characters long");
+    }
+    const db = await this.db;
+    const user = await db.user.getUserByUsername(username);
+    return !user;
+  }
 }
