@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -9,7 +9,8 @@ import {
 import { useUserOnboarding } from "@/lib/hooks/mutations/useUser";
 import { AvatarSelector } from "@/components/avatar-selector";
 import { Button } from "@/components/ui/button";
-
+import { useDebounce } from "@/lib/hooks/useDebounce";
+import { useIsUserNameAvailable } from "@/lib/hooks/query/useIsUsernameAvailable.query";
 export default function UserOnboardingForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -19,9 +20,15 @@ export default function UserOnboardingForm() {
     setValue,
     formState: { errors, isSubmitting },
     watch,
+    setError,
+    clearErrors,
   } = useForm<UserOnboardingInput>({
     resolver: zodResolver(userOnboardingSchema),
   });
+
+  // below logic will check of username availablity
+  const username = useDebounce(watch("username"), 400);
+  const { isLoading, isError, data } = useIsUserNameAvailable(username);
 
   const mutation = useUserOnboarding();
 
@@ -42,6 +49,16 @@ export default function UserOnboardingForm() {
   const handleAvatarSelect = (avatarId: number) => {
     setValue("avatarId", avatarId);
   };
+
+  useEffect(() => {
+    if (isError || isLoading || !data) return;
+    if (!data.isAvailable) {
+      setError("username", {
+        type: "manual",
+        message: "Username is not available",
+      });
+    } else clearErrors("username");
+  }, [data, isError, isLoading]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white p-2 md:p-8">
