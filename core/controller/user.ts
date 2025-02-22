@@ -1,7 +1,7 @@
-import { CreateUserSchema } from "@/core/dto";
+import { CreateUserSchema, UsernameSchema } from "@/core/dto";
 import { BadRequestError } from "@/core/errors";
 import { basicAuth, InjectDB } from "../decorators";
-import type { CreateUserDto } from "@/core/dto";
+import type { CreateUserDto, UsernameDto } from "@/core/dto";
 @InjectDB()
 export class UserController {
   private db!: Promise<DB>;
@@ -34,16 +34,20 @@ export class UserController {
     const response = await db.user.createUser(userData);
     return response;
   }
-  @basicAuth()
-  async isUsernameAvailable(username: string | null) {
+  // @basicAuth()
+  async isUsernameAvailable(username: UsernameDto | null) {
     if (!username) {
       throw new BadRequestError("Username is required");
     }
-    if (username.trim().length <= 3) {
-      throw new BadRequestError("Username must be at least 3 characters long");
+    const parsedUsername = UsernameSchema.safeParse(username);
+    if (parsedUsername.error) {
+      throw new BadRequestError(
+        "Invalid username",
+        parsedUsername.error.issues[0].message
+      );
     }
     const db = await this.db;
-    const user = await db.user.getUserByUsername(username);
+    const user = await db.user.getUserByUsername(parsedUsername.data);
     return !user;
   }
 }

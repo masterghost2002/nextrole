@@ -1,6 +1,14 @@
 import { z } from "zod";
 
 // Define the schema
+export const UsernameSchema = z
+  .string()
+  .min(4, "Username must be at least 5 characters long")
+  .max(16, "Username cannot exceed 16 characters")
+  .refine(
+    (value) => /^[a-zA-Z][a-zA-Z0-9_.]*$/.test(value),
+    "Username can only contain letters, numbers, underscores (_), and periods (.), and cannot start with a number"
+  );
 export const CreateUserSchema = z.object({
   bio: z
     .string()
@@ -10,10 +18,7 @@ export const CreateUserSchema = z.object({
     .string()
     .min(3, "Nickname must be at least 3 characters long")
     .max(50, "Nickname cannot exceed 50 characters"),
-  username: z
-    .string()
-    .min(5, "Username must be at least 5 characters long")
-    .max(30, "Username cannot exceed 30 characters"),
+  username: UsernameSchema,
   avatarId: z.number().int().positive("Avatar ID must be a positive integer"),
   dob: z
     .date()
@@ -31,3 +36,4 @@ export const CreateUserSchema = z.object({
 
 // Infer the TypeScript type from the schema
 export type CreateUserDto = z.infer<typeof CreateUserSchema>;
+export type UsernameDto = z.infer<typeof UsernameSchema>;
