@@ -34,7 +34,7 @@ export class UserController {
     const response = await db.user.createUser(userData);
     return response;
   }
-  // @basicAuth()
+  @basicAuth()
   async isUsernameAvailable(username: UsernameDto | null) {
     if (!username) {
       throw new BadRequestError("Username is required");
