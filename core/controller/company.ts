@@ -1,16 +1,22 @@
 import { InjectDB } from "@/core/decorators";
 import {
+  CompanyNameDto,
   CreateCompanyDto,
   CreateCompanySchema,
   GetCompanyListSchema,
+  TCompanyName,
   TGetCompanyListDto,
 } from "@/core/dto";
 import { BadRequestError } from "@/core/errors";
+import { ElasticSearch } from "@/core/services/search.elastic";
 
 @InjectDB()
 export class CompanyController {
   private db!: Promise<DB>;
-  constructor() {}
+  private elasticSearchInstance: ElasticSearch;
+  constructor() {
+    this.elasticSearchInstance = ElasticSearch.getInstance();
+  }
   async createCompany(company: CreateCompanyDto) {
     const validateCompany = CreateCompanySchema.safeParse(company);
     if (validateCompany.error) {
@@ -27,6 +33,17 @@ export class CompanyController {
     }
     const db = await this.db;
     const result = await db.company.getCompanyList(validateParams.data);
+    return result;
+  }
+
+  searchCompanyListByName(name: TCompanyName) {
+    const validedName = CompanyNameDto.safeParse(name);
+    if (validedName.error) {
+      throw new BadRequestError(validedName.error.message);
+    }
+    const result = this.elasticSearchInstance.getMatchingCompaniesByName(
+      validedName.data
+    );
     return result;
   }
 }
