@@ -20,4 +20,22 @@ export const CreateCompanySchema = z.object({
     .optional(), // Optional field
 });
 
+export const GetCompanyListSchema = z.object({
+  page: z
+    .number()
+    .optional()
+    .default(1)
+    .refine((value) => value >= 0, {
+      message: "Page must be a non-negative number.",
+    }),
+  limit: z
+    .number()
+    .optional()
+    .default(10) // You can set a default value if needed
+    .refine((value) => value > 0 && value <= 20, {
+      message: "Limit must be greater than 0 and less than or equal to 20.",
+    }),
+});
+
+export type TGetCompanyListDto = z.infer<typeof GetCompanyListSchema>;
 export type CreateCompanyDto = z.infer<typeof CreateCompanySchema>;
