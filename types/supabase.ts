@@ -36,6 +36,7 @@ export type Database = {
           name: string
           num_users_on_app: number | null
           updated_at: string | null
+          verification_status: string | null
           website: string | null
         }
         Insert: {
@@ -46,6 +47,7 @@ export type Database = {
           name: string
           num_users_on_app?: number | null
           updated_at?: string | null
+          verification_status?: string | null
           website?: string | null
         }
         Update: {
@@ -56,6 +58,7 @@ export type Database = {
           name?: string
           num_users_on_app?: number | null
           updated_at?: string | null
+          verification_status?: string | null
           website?: string | null
         }
         Relationships: []
@@ -136,6 +139,7 @@ export type Database = {
           joined_date: string | null
           nickname: string | null
           profile_image_url: string | null
+          role: string | null
           updated_at: string | null
           user_id: string
           username: string
@@ -156,6 +160,7 @@ export type Database = {
           joined_date?: string | null
           nickname?: string | null
           profile_image_url?: string | null
+          role?: string | null
           updated_at?: string | null
           user_id?: string
           username: string
@@ -176,6 +181,7 @@ export type Database = {
           joined_date?: string | null
           nickname?: string | null
           profile_image_url?: string | null
+          role?: string | null
           updated_at?: string | null
           user_id?: string
           username?: string
