@@ -1,6 +1,6 @@
 import { CompanyController, withErrorHandling } from "@/core";
 import { NextRequest, NextResponse } from "next/server";
-
+export const runtime = 'edge';
 export const GET = withErrorHandling(async (request: NextRequest) => {
   const companyController = new CompanyController();
   const params = request.nextUrl.searchParams;
