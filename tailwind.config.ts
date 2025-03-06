@@ -45,7 +45,7 @@ const config: Config = {
           100: "#F9D6D6", // Lightest primary
         },
         // Background and foreground colors
-        background: "var(--background)",
+        background: "#F7F7F7",
         foreground: "var(--foreground)",
       },
       // Typography Settings
