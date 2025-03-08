@@ -10,7 +10,7 @@ export class ElasticSearch {
     const options = {
       keys: ["name"], // Search only in the 'name' field
       includeScore: true, // Include search score in results
-      threshold: 0.5, // Lower threshold means stricter matching (0 = exact match, 1 = very loose)
+      threshold: 0.2, // Lower threshold means stricter matching (0 = exact match, 1 = very loose)
       ignoreLocation: true, // Ignore where the match occurs in the string
       minMatchCharLength: 2, // Minimum number of characters to match
     };

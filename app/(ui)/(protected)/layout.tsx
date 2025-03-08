@@ -17,7 +17,7 @@ export default async function ProtectedLayout({
       </main>
 
       {/* Right Section */}
-      <div className="flex-1 border-l-[2px]  border-neutral-500">
+      <div className="flex-1 border-l-[2px]  border-neutral-500 flex">
         <QuickBar />
       </div>
     </div>
