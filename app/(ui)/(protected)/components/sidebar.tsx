@@ -29,12 +29,12 @@ const QuickButtons = [
 ];
 export const SideBar = () => {
   return (
-    <aside className="p-4 w-[240px]">
-      <div className="text-4xl font-black text-[#03051E] relative group cursor-pointer">
+    <aside className="p-2 md:p-4 w-full md:w-[240px] bg-background">
+      <div className="text-4xl hidden md:block font-black text-[#03051E] relative group cursor-pointer">
         Next<span className="text-[#D91656]">Role</span>
         <div className="absolute -bottom-2 left-0 w-0 h-1 bg-[#D91656] group-hover:w-full transition-all duration-300"></div>
       </div>
-      <ul className="flex flex-col gap-5 my-4 items-start">
+      <ul className="flex md:flex-col gap-2 md:gap-5 md:my-4  justify-between md:justify-start items-start">
         {QuickButtons.map((link) => (
           <LinkButton
             key={link.link}
