@@ -6,11 +6,13 @@ import { userCompanySearch } from "@/lib/hooks/query";
 import { useDebounce } from "@/lib/hooks/useDebounce";
 import { List } from "@/components/ui";
 import { CompanyCompactCardSkeleton } from "@/components/skeletons";
+import { useRouter } from "next/navigation";
 
 export const QuickBar = () => {
   const [isSearchEnabled, setIsSearchEnabled] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const router = useRouter();
 
   const debouncedSearchTerm = useDebounce(searchTerm, 400);
   const { data = [], isLoading } = userCompanySearch(debouncedSearchTerm);
@@ -63,7 +65,7 @@ export const QuickBar = () => {
             <li
               key={company.id}
               className="flex items-center gap-2 border-b-[1px] px-4 py-2 cursor-pointer"
-              onClick={() => window.open(company.id, "_blank")}
+              onClick={() => router.push(`/company/${company.id}`)}
             >
               <img
                 src={company.logo_url}
