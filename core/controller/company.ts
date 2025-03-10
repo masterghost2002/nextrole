@@ -56,7 +56,7 @@ export class CompanyController {
     return result;
   }
 
-  async companyById(id: TCompanyIdDto) {
+  async companyById(id: TCompanyIdDto): Promise<TCompany> {
     const validatedId = CompanyIdDto.safeParse(id);
     if (validatedId.error)
       throw new BadRequestError(validatedId.error?.message);

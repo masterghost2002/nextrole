@@ -1,6 +1,7 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { CreateCompanyDto, TCompanyIdDto, TGetCompanyListDto } from "../dto";
 import { InternalServerError } from "../errors";
+import { Database } from "@/types/supabase";
 
 export class Company {
   constructor(private supabase: SupabaseClient) {
@@ -39,7 +40,9 @@ export class Company {
     if (error) throw new Error(error.message);
     return data;
   }
-  async companyById(id: TCompanyIdDto) {
+  async companyById(
+    id: TCompanyIdDto
+  ): Promise<DatabaseSchema["public"]["Tables"]["companies"]["Row"]> {
     const { data, error } = await this.supabase
       .from("companies")
       .select("*")

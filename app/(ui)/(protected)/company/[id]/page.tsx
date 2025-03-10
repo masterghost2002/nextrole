@@ -1,6 +1,15 @@
 import { Suspense } from "react";
 import { CompanyBanner, CompanyBannerSkeleton, TabSelector } from "./component";
-import { HorizontalScrollList } from "@/components/ui";
+import { generateCompanyMetadata } from "@/lib/metadata/generate-company-metadata";
+import { Metadata } from "next";
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  return await generateCompanyMetadata(id);
+}
 export default async function Page({
   params,
 }: {
