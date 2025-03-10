@@ -12,7 +12,7 @@ export default async function ProtectedLayout({
       </div>
 
       {/* Main Content - scrollable */}
-      <main className="w-full md:w-[700px] flex-shrink-0 flex-1 overflow-y-auto ">
+      <main className="w-full md:w-[700px] flex-shrink-0 md:flex-shrink md:flex-none flex-1 overflow-y-auto ">
         {children}
       </main>
 
