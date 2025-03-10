@@ -1,5 +1,5 @@
 import { SupabaseClient } from "@supabase/supabase-js";
-import { CreateCompanyDto, TGetCompanyListDto } from "../dto";
+import { CreateCompanyDto, TCompanyIdDto, TGetCompanyListDto } from "../dto";
 import { InternalServerError } from "../errors";
 
 export class Company {
@@ -37,6 +37,15 @@ export class Company {
     const { data, error } = await query.range(offset, offset + limit - 1); // Fetch only the required rows
 
     if (error) throw new Error(error.message);
+    return data;
+  }
+  async companyById(id: TCompanyIdDto) {
+    const { data, error } = await this.supabase
+      .from("companies")
+      .select("*")
+      .eq("id", id)
+      .single();
+    if (error) throw new InternalServerError("Something went wrong");
     return data;
   }
 }

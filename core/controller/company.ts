@@ -1,5 +1,6 @@
 import { auth, InjectDB } from "@/core/decorators";
 import {
+  CompanyIdDto,
   CompanyNameDto,
   CreateCompanySchema,
   GetCompanyListSchema,
@@ -10,7 +11,9 @@ import type {
   TCompanyName,
   TGetCompanyListDto,
   CreateCompanyDto,
+  TCompanyIdDto,
 } from "@/core/dto";
+import { threadId } from "worker_threads";
 
 @InjectDB()
 export class CompanyController {
@@ -51,5 +54,14 @@ export class CompanyController {
       validedName.data
     );
     return result;
+  }
+
+  async companyById(id: TCompanyIdDto) {
+    const validatedId = CompanyIdDto.safeParse(id);
+    if (validatedId.error)
+      throw new BadRequestError(validatedId.error?.message);
+    const db = await this.db;
+    const company = await db.company.companyById(id);
+    return company;
   }
 }

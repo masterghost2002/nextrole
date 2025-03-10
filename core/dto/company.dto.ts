@@ -38,7 +38,9 @@ export const GetCompanyListSchema = z.object({
 });
 
 export const CompanyNameDto = z.string().min(2).max(40);
+export const CompanyIdDto = z.string().uuid();
 
 export type TGetCompanyListDto = z.infer<typeof GetCompanyListSchema>;
 export type TCompanyName = z.infer<typeof CompanyNameDto>;
 export type CreateCompanyDto = z.infer<typeof CreateCompanySchema>;
+export type TCompanyIdDto = z.infer<typeof CompanyIdDto>;
