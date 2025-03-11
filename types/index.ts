@@ -1,3 +1,4 @@
+export type CONFIG<T> = Readonly<Partial<T>>;
 export enum COMPANY_VERIFCATION_STATUS {
   VERIFIED = 'VERIFIED',
   PENDING = 'PENDING',
