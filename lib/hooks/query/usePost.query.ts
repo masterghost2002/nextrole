@@ -17,10 +17,10 @@ export const useGetPostByCompanyId = (params: TGetPostByCompanyIdDto) => {
 
 export const useGetPosts = (params: TGetPosts) => {
   return useInfiniteQuery({
-    queryKey: ['company-post', params.page, params.limit],
+    queryKey: ['posts', params.page, params.limit],
     queryFn: ({ pageParam = 1 }) =>
       postQueries.getPosts({ ...params, page: pageParam }),
-    enabled: +params.page <= 0 || +params.limit <= 0,
+    enabled: +params.page > 0 && +params.limit > 0,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length === params.limit ? allPages.length + 1 : undefined;

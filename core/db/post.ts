@@ -27,4 +27,18 @@ export class Post {
     if (error) throw new Error(error.message);
     return data;
   }
+  async getPosts(params: TGetPostByCompanyIdDto) {
+    const { page = 1, limit = 20 } = params;
+    let query = this.supabase
+      .from('posts')
+      .select('*')
+      .order('created_at', { ascending: true });
+    if (page === 0) {
+      throw new Error('Invalid page');
+    }
+    const offset = (page - 1) * limit;
+    const { data, error } = await query.range(offset, offset + limit - 1);
+    if (error) throw new Error(error.message);
+    return data;
+  }
 }

@@ -8,7 +8,7 @@ export const PostDto = z.object({
   user_id: z.string().uuid()
 });
 
-export const GetPosts = z.object({
+export const GetPostsDto = z.object({
   page: z
     .number()
     .optional()
@@ -29,8 +29,8 @@ export const GetPostByCompanyIdDto = z
   .object({
     company_id: z.string().uuid()
   })
-  .merge(GetPosts);
+  .merge(GetPostsDto);
 
 export type TGetPostByCompanyIdDto = z.infer<typeof GetPostByCompanyIdDto>;
 export type TPostDto = z.infer<typeof PostDto>;
-export type TGetPosts = z.infer<typeof GetPosts>;
+export type TGetPosts = z.infer<typeof GetPostsDto>;
