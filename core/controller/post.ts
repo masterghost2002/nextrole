@@ -6,7 +6,7 @@ export class PostController {
   private db!: Promise<DB>;
   constructor() {}
   @auth()
-  async createPost(post: TPostDto, user: TUser | undefined) {
+  async createPost(post: TPostDto, user: TUser | undefined = undefined) {
     if (!user) throw new UnauthorizedError('Invalid user');
     const parsedPost = PostDto.safeParse({ ...post, user_id: user.user_id });
     if (parsedPost.error) throw new BadRequestError(parsedPost.error.message);
