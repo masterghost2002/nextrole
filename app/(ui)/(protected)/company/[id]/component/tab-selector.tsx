@@ -1,7 +1,11 @@
 import React from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui';
+import { PostTab } from './post-tab';
 
-export const TabSelector = () => {
+type TProps = {
+  id: string;
+};
+export const TabSelector = (props: TProps) => {
   return (
     <Tabs defaultValue="posts" className="mx-auto w-full max-w-3xl">
       <TabsList className="flex items-center justify-between rounded-none bg-neutral-100 p-2">
@@ -29,34 +33,8 @@ export const TabSelector = () => {
         value="posts"
         className="rounded-lg border border-neutral-200 bg-white p-4 shadow-retro-sm"
       >
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-neutral-900">
-            Recent Posts
-          </h3>
-          <p className="text-sm text-neutral-700">
-            Browse through the latest community posts and discussions.
-          </p>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded border border-neutral-200 bg-background p-3 transition-all hover:border-primary-300">
-              <h4 className="font-medium text-neutral-800">
-                Getting started with React
-              </h4>
-              <p className="mt-1 text-sm text-neutral-600">
-                A beginner's guide to React development
-              </p>
-            </div>
-            <div className="rounded border border-neutral-200 bg-background p-3 transition-all hover:border-primary-300">
-              <h4 className="font-medium text-neutral-800">
-                Advanced TypeScript Tips
-              </h4>
-              <p className="mt-1 text-sm text-neutral-600">
-                Improve your TypeScript skills with these pro tips
-              </p>
-            </div>
-          </div>
-        </div>
+        <PostTab id={props.id} />
       </TabsContent>
-
       <TabsContent
         value="experience"
         className="rounded-lg border border-neutral-200 bg-white p-4 shadow-retro-sm"

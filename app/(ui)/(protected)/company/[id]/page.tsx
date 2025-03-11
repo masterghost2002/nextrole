@@ -22,7 +22,7 @@ export default async function Page({
       <Suspense fallback={<CompanyBannerSkeleton />}>
         <CompanyBanner id={id} />
       </Suspense>
-      <TabSelector />
+      <TabSelector id={id} />
     </div>
   );
 }

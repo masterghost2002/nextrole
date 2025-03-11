@@ -8,9 +8,7 @@ export const postQueries = {
       const value = String(params[Tkey]);
       searchParams.set(key, value);
     }
-    const response = await fetch(
-      `/api/post/company?${searchParams.toString()}`
-    );
+    const response = await fetch(`/api/post?${searchParams.toString()}`);
     if (!response.ok) throw new Error('Failed to fetch posts');
     return response.json() as Promise<TPost[]>;
   }
