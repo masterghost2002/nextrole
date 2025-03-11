@@ -8,4 +8,23 @@ export const PostDto = z.object({
   user_id: z.string().uuid()
 });
 
+export const GetPostByCompanyIdDto = z.object({
+  company_id: z.string().uuid(),
+  page: z
+    .number()
+    .optional()
+    .default(1)
+    .refine((value) => value >= 0, {
+      message: 'Page must be a non-negative number.'
+    }),
+  limit: z
+    .number()
+    .optional()
+    .default(10) // You can set a default value if needed
+    .refine((value) => value > 0 && value <= 20, {
+      message: 'Limit must be greater than 0 and less than or equal to 20.'
+    })
+});
+
+export type TGetPostByCompanyIdDto = z.infer<typeof GetPostByCompanyIdDto>;
 export type TPostDto = z.infer<typeof PostDto>;

@@ -1,5 +1,10 @@
 import { auth, InjectDB } from '@/core/decorators';
-import { PostDto, type TPostDto } from '@/core/dto';
+import {
+  GetPostByCompanyIdDto,
+  PostDto,
+  type TGetPostByCompanyIdDto,
+  type TPostDto
+} from '@/core/dto';
 import { BadRequestError, UnauthorizedError } from '../errors';
 @InjectDB()
 export class PostController {
@@ -13,5 +18,14 @@ export class PostController {
     const db = await this.db;
     const result = await db.post.createPost(parsedPost.data);
     return result;
+  }
+
+  async getPostsByCompanyId(params: TGetPostByCompanyIdDto) {
+    const validatedParams = GetPostByCompanyIdDto.safeParse(params);
+    if (validatedParams.error)
+      throw new BadRequestError(validatedParams.error.message);
+    const db = await this.db;
+    const result = await db.post.getPostByCompanyId(validatedParams.data);
+    return result as TPost[];
   }
 }
