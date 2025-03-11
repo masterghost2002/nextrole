@@ -39,6 +39,8 @@ export function auth() {
         throw new UnauthorizedError('Authentication required');
       }
 
+      args.push(user);
+
       return originalMethod.apply(this, args);
     };
 
