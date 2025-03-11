@@ -1,7 +1,7 @@
-import { SupabaseClient } from "@supabase/supabase-js";
-import { CreateCompanyDto, TCompanyIdDto, TGetCompanyListDto } from "../dto";
-import { InternalServerError } from "../errors";
-import { Database } from "@/types/supabase";
+import { SupabaseClient } from '@supabase/supabase-js';
+import { CreateCompanyDto, TCompanyIdDto, TGetCompanyListDto } from '../dto';
+import { InternalServerError } from '../errors';
+import { Database } from '@/types/supabase';
 
 export class Company {
   constructor(private supabase: SupabaseClient) {
@@ -9,11 +9,11 @@ export class Company {
   }
   async createCompany(company: CreateCompanyDto) {
     const { data, error } = await this.supabase
-      .from("companies")
+      .from('companies')
       .insert(company)
       .select();
     if (error) {
-      throw new InternalServerError("Something went wrong");
+      throw new InternalServerError('Something went wrong');
     }
 
     return data;
@@ -22,9 +22,9 @@ export class Company {
     const { page = 1, limit = 20 } = params;
 
     let query = this.supabase
-      .from("companies") // Replace 'companies' with your table name
-      .select("*") // Select all columns or specify the ones you need
-      .order("name", { ascending: true }); // Sort by 'name' in ascending order
+      .from('companies') // Replace 'companies' with your table name
+      .select('*') // Select all columns or specify the ones you need
+      .order('name', { ascending: true }); // Sort by 'name' in ascending order
 
     // If page is 0, return all records (still sorted)
     if (page === 0) {
@@ -42,13 +42,13 @@ export class Company {
   }
   async companyById(
     id: TCompanyIdDto
-  ): Promise<DatabaseSchema["public"]["Tables"]["companies"]["Row"]> {
+  ): Promise<DatabaseSchema['public']['Tables']['companies']['Row']> {
     const { data, error } = await this.supabase
-      .from("companies")
-      .select("*")
-      .eq("id", id)
+      .from('companies')
+      .select('*')
+      .eq('id', id)
       .single();
-    if (error) throw new InternalServerError("Something went wrong");
+    if (error) throw new InternalServerError('Something went wrong');
     return data;
   }
 }

@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui";
-import { Button } from "./ui/button";
-import { useAvatarQuery } from "@/lib/hooks/query";
-import { Loader2 } from "lucide-react";
+  DialogTrigger
+} from '@/components/ui/dialog';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui';
+import { Button } from './ui/button';
+import { useAvatarQuery } from '@/lib/hooks/query';
+import { Loader2 } from 'lucide-react';
 
 export type AvatarOption = {
   id: string;
@@ -25,8 +25,8 @@ interface AvatarSelectorProps {
 
 const Loading = () => {
   return (
-    <div className="flex justify-center items-center h-full">
-      <Loader2 className="w-4 h-4 animate-spin" />
+    <div className="flex h-full items-center justify-center">
+      <Loader2 className="h-4 w-4 animate-spin" />
     </div>
   );
 };
@@ -34,12 +34,12 @@ const Loading = () => {
 export function AvatarSelector({
   selectedAvatarId,
   onAvatarSelect,
-  error,
+  error
 }: AvatarSelectorProps) {
   const [open, setOpen] = useState(false);
 
   const handleAvatarSelect = (
-    avatar: DatabaseSchema["public"]["Tables"]["avatars"]["Row"]
+    avatar: DatabaseSchema['public']['Tables']['avatars']['Row']
   ) => {
     onAvatarSelect(avatar.id);
     setOpen(false);
@@ -51,11 +51,11 @@ export function AvatarSelector({
   );
 
   return (
-    <div className="flex flex-col items-center mb-6">
+    <div className="mb-6 flex flex-col items-center">
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <div className="cursor-pointer">
-            <Avatar className="w-32 h-32 border-4 border-[#D91656]">
+            <Avatar className="h-32 w-32 border-4 border-[#D91656]">
               {selectedAvatar ? (
                 <AvatarImage
                   src={selectedAvatar.url}
@@ -70,7 +70,7 @@ export function AvatarSelector({
             <Button
               type="button"
               variant="secondary"
-              className="py-2 mt-2 px-3"
+              className="mt-2 px-3 py-2"
             >
               Select Avatar
             </Button>
@@ -80,19 +80,19 @@ export function AvatarSelector({
           <DialogHeader>
             <DialogTitle>Choose your avatar</DialogTitle>
           </DialogHeader>
-          <div className="grid grid-cols-3 md:grid-cols-4 gap-4 p-4">
+          <div className="grid grid-cols-3 gap-4 p-4 md:grid-cols-4">
             {isLoading && <Loading />}
             {avatars.map((avatar) => (
               <div
                 key={avatar.id}
                 className={`cursor-pointer transition-all ${
                   selectedAvatarId === avatar.id
-                    ? "ring-4 ring-[#D91656] ring-offset-2"
-                    : "hover:scale-105"
+                    ? 'ring-4 ring-[#D91656] ring-offset-2'
+                    : 'hover:scale-105'
                 }`}
                 onClick={() => handleAvatarSelect(avatar)}
               >
-                <Avatar className="w-24 h-24">
+                <Avatar className="h-24 w-24">
                   <AvatarImage src={avatar.url} alt={avatar.name} />
                   <AvatarFallback>Avatar</AvatarFallback>
                 </Avatar>
@@ -101,7 +101,7 @@ export function AvatarSelector({
           </div>
         </DialogContent>
       </Dialog>
-      {error && <p className="text-[#D91656] text-sm mt-1">{error}</p>}
+      {error && <p className="mt-1 text-sm text-[#D91656]">{error}</p>}
     </div>
   );
 }

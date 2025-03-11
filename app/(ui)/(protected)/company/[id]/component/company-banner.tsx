@@ -1,4 +1,4 @@
-import { COMPANY_VERIFCATION_STATUS } from "@/types";
+import { COMPANY_VERIFCATION_STATUS } from '@/types';
 
 type Tprops = {
   id: string;
@@ -6,31 +6,31 @@ type Tprops = {
 const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN;
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
   });
 };
 export const CompanyBanner = async (props: Tprops) => {
   const respnse = await fetch(`${DOMAIN}/api/company?id=${props.id}`);
   const companyData = await respnse.json();
   return (
-    <div className="w-full bg-white shadow-sm border-b border-neutral-200 p-4">
+    <div className="w-full border-b border-neutral-200 bg-white p-4 shadow-sm">
       <div className="flex flex-col space-y-3 sm:flex-row sm:justify-between sm:space-y-0">
         <div className="flex items-center space-x-3">
           <img
             src={companyData.logo_url}
             alt={`${companyData.name} logo`}
-            className="w-8 h-8 rounded-md flex-shrink-0"
+            className="h-8 w-8 flex-shrink-0 rounded-md"
           />
           <div className="flex-1">
-            <div className="flex items-center flex-wrap gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <h2 className="text-lg font-semibold text-neutral-900">
                 {companyData.name}
               </h2>
-              {companyData.verification_status === "VERIFIED" && (
-                <span className="bg-green-50 text-green-700 text-xs px-2 py-0.5 rounded-full font-medium">
+              {companyData.verification_status === 'VERIFIED' && (
+                <span className="rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700">
                   Verified
                 </span>
               )}
@@ -53,7 +53,7 @@ export const CompanyBanner = async (props: Tprops) => {
         </div>
       </div>
 
-      <div className="mt-3 pt-3 border-t border-neutral-200">
+      <div className="mt-3 border-t border-neutral-200 pt-3">
         <div className="flex flex-col space-y-3 sm:flex-row sm:space-y-0">
           <div className="w-full sm:w-1/2 sm:pr-2">
             <h3 className="text-xs font-medium text-neutral-500">

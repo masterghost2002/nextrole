@@ -1,4 +1,4 @@
-import { SupabaseClient } from "@supabase/supabase-js";
+import { SupabaseClient } from '@supabase/supabase-js';
 export class Avatar {
   constructor(private supabase: SupabaseClient) {
     this.supabase = supabase;
@@ -6,9 +6,9 @@ export class Avatar {
 
   async getAllAvatars() {
     const { data, error } = (await this.supabase
-      .from("avatars")
-      .select("*")) as {
-      data: DatabaseSchema["public"]["Tables"]["avatars"]["Row"][] | null;
+      .from('avatars')
+      .select('*')) as {
+      data: DatabaseSchema['public']['Tables']['avatars']['Row'][] | null;
       error: any;
     };
     if (error) return [];
@@ -17,11 +17,11 @@ export class Avatar {
 
   async getAvatarById(id: string) {
     const { data, error } = (await this.supabase
-      .from("avatars")
-      .select("*")
-      .eq("id", id)
+      .from('avatars')
+      .select('*')
+      .eq('id', id)
       .single()) as {
-      data: DatabaseSchema["public"]["Tables"]["avatars"]["Row"] | null;
+      data: DatabaseSchema['public']['Tables']['avatars']['Row'] | null;
       error: any;
     };
     if (error) return null;

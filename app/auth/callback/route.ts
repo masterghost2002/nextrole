@@ -1,15 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 // The client you created from the Server-Side Auth instructions
-import { createClient } from "@/lib/supabase";
+import { createClient } from '@/lib/supabase';
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
-  const code = searchParams.get("code");
+  const code = searchParams.get('code');
   // if "next" is in param, use it as the redirect URL
-  const next = searchParams.get("next") ?? "/";
-  console.log("next", next);
-  console.log("origin", origin);
-  console.log("code", code);
+  const next = searchParams.get('next') ?? '/';
+  console.log('next', next);
+  console.log('origin', origin);
+  console.log('code', code);
 
   if (!code) {
     return NextResponse.redirect(`${origin}/404`);
@@ -23,9 +23,9 @@ export async function GET(request: NextRequest) {
   }
 
   const userFromDatabase = await supabase
-    .from("users")
-    .select("*")
-    .eq("email", data.user.email)
+    .from('users')
+    .select('*')
+    .eq('email', data.user.email)
     .single();
   if (!userFromDatabase.data)
     return NextResponse.redirect(`${origin}/onboarding`);

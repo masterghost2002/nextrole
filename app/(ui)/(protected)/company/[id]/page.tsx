@@ -1,9 +1,9 @@
-import { Suspense } from "react";
-import { CompanyBanner, CompanyBannerSkeleton, TabSelector } from "./component";
-import { generateCompanyMetadata } from "@/lib/metadata/generate-company-metadata";
-import { Metadata } from "next";
+import { Suspense } from 'react';
+import { CompanyBanner, CompanyBannerSkeleton, TabSelector } from './component';
+import { generateCompanyMetadata } from '@/lib/metadata/generate-company-metadata';
+import { Metadata } from 'next';
 export async function generateMetadata({
-  params,
+  params
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
@@ -11,14 +11,14 @@ export async function generateMetadata({
   return await generateCompanyMetadata(id);
 }
 export default async function Page({
-  params,
+  params
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
 
   return (
-    <div className="text-neutral-900  pb-20">
+    <div className="pb-20 text-neutral-900">
       <Suspense fallback={<CompanyBannerSkeleton />}>
         <CompanyBanner id={id} />
       </Suspense>

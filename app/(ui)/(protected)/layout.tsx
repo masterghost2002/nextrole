@@ -1,18 +1,18 @@
-import { QuickBar, SideBar } from "./components";
+import { QuickBar, SideBar } from './components';
 export default async function ProtectedLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col md:flex-row w-full h-screen bg-background">
+    <div className="flex h-screen w-full flex-col bg-background md:flex-row">
       {/* Left Sidebar - fixed height with no scroll */}
-      <div className="flex-1 fixed md:static w-full md:w-auto bottom-0 border-t-[2px] md:border-t-0 md:border-r-[2px] border-neutral-500 md:flex md:justify-end md:overflow-hidden">
+      <div className="fixed bottom-0 w-full flex-1 border-t-[2px] border-neutral-500 md:static md:flex md:w-auto md:justify-end md:overflow-hidden md:border-r-[2px] md:border-t-0">
         <SideBar />
       </div>
 
       {/* Main Content - scrollable */}
-      <main className="w-full md:w-[700px] flex-shrink-0 md:flex-shrink md:flex-none flex-1 overflow-y-auto ">
+      <main className="w-full flex-1 flex-shrink-0 overflow-y-auto md:w-[700px] md:flex-none md:flex-shrink">
         {children}
       </main>
 

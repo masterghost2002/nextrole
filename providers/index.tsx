@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
 import {
   QueryClient,
   QueryClientConfig,
-  QueryClientProvider,
-} from "@tanstack/react-query";
-import { useState } from "react";
+  QueryClientProvider
+} from '@tanstack/react-query';
+import { useState } from 'react';
 
 const QueryConfig: QueryClientConfig = {
   defaultOptions: {
@@ -13,9 +13,9 @@ const QueryConfig: QueryClientConfig = {
       retry: (failureCount, error) => {
         if ((error as any)?.response?.status === 401) return false;
         return failureCount < 3;
-      },
-    },
-  },
+      }
+    }
+  }
 };
 
 export function Providers({ children }: { children: React.ReactNode }) {

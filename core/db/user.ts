@@ -1,14 +1,14 @@
-import { SupabaseClient } from "@supabase/supabase-js";
-type TUser = DatabaseSchema["public"]["Tables"]["users"]["Row"];
+import { SupabaseClient } from '@supabase/supabase-js';
+type TUser = DatabaseSchema['public']['Tables']['users']['Row'];
 type TCreateUser = Pick<
   TUser,
-  | "email"
-  | "username"
-  | "bio"
-  | "dob"
-  | "yoe"
-  | "current_company_id"
-  | "current_position"
+  | 'email'
+  | 'username'
+  | 'bio'
+  | 'dob'
+  | 'yoe'
+  | 'current_company_id'
+  | 'current_position'
 >;
 
 // Decorator factory
@@ -20,12 +20,12 @@ function getUserBy(key: string) {
   ) {
     descriptor.value = async function (this: User, value: string) {
       const { data, error } = await this.supabase
-        .from("users")
-        .select("*")
+        .from('users')
+        .select('*')
         .eq(key, value);
 
       if (error) {
-        console.error("Error fetching user", error);
+        console.error('Error fetching user', error);
         return null;
       }
 
@@ -41,21 +41,21 @@ export class User {
     this.supabase = supabase;
   }
 
-  @getUserBy("email")
+  @getUserBy('email')
   async getUserByEmail(
     email: string
-  ): Promise<DatabaseSchema["public"]["Tables"]["users"]["Row"] | null> {
+  ): Promise<DatabaseSchema['public']['Tables']['users']['Row'] | null> {
     // Method implementation will be replaced by decorator
     return null;
   }
-  @getUserBy("username")
+  @getUserBy('username')
   async getUserByUsername(username: string): Promise<TUser | null> {
     return null;
   }
 
   async createUser(user: TCreateUser) {
     const { data, error } = await this.supabase
-      .from("users")
+      .from('users')
       .insert(user)
       .select();
 

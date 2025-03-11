@@ -1,19 +1,19 @@
-import { auth, InjectDB } from "@/core/decorators";
+import { auth, InjectDB } from '@/core/decorators';
 import {
   CompanyIdDto,
   CompanyNameDto,
   CreateCompanySchema,
-  GetCompanyListSchema,
-} from "@/core/dto";
-import { BadRequestError } from "@/core/errors";
-import { ElasticSearch } from "@/core/services/search.elastic";
+  GetCompanyListSchema
+} from '@/core/dto';
+import { BadRequestError } from '@/core/errors';
+import { ElasticSearch } from '@/core/services/search.elastic';
 import type {
   TCompanyName,
   TGetCompanyListDto,
   CreateCompanyDto,
-  TCompanyIdDto,
-} from "@/core/dto";
-import { threadId } from "worker_threads";
+  TCompanyIdDto
+} from '@/core/dto';
+import { threadId } from 'worker_threads';
 
 @InjectDB()
 export class CompanyController {

@@ -1,11 +1,11 @@
-"use client";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
+'use client';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
 export const LinkButton = ({
   href,
   icon,
-  name,
+  name
 }: {
   href: string;
   className?: string;
@@ -18,8 +18,8 @@ export const LinkButton = ({
     <Link
       href={href}
       className={cn(
-        "flex md:flex-row flex-col items-center text-neutral-500 gap-2 md:gap-3 hover:text-neutral-900 text-xs md:text-lg font-medium",
-        isActive && "text-neutral-900 font-semibold"
+        'flex flex-col items-center gap-2 text-xs font-medium text-neutral-500 hover:text-neutral-900 md:flex-row md:gap-3 md:text-lg',
+        isActive && 'font-semibold text-neutral-900'
       )}
     >
       {icon}

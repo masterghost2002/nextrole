@@ -1,1 +1,1 @@
-export * from "./company-compact-card.skeleton";
+export * from './company-compact-card.skeleton';

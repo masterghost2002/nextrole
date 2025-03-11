@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 type TList<T> = {
   data: T[];
   render: (item: T) => React.ReactNode;
@@ -20,7 +20,7 @@ const LoadingComponent = (props: TLoadingComponent) => {
   const {
     LoadingSkeleton,
     loadingSkeletonLength = 5,
-    showLoading = false,
+    showLoading = false
   } = props;
   if (!showLoading) return null;
   if (!LoadingSkeleton)
@@ -29,7 +29,7 @@ const LoadingComponent = (props: TLoadingComponent) => {
         {Array.from({ length: loadingSkeletonLength }).map((_, index) => (
           <li
             key={index}
-            className="w-full h-4 rounded-md bg-neutral-400 animate-pulse"
+            className="h-4 w-full animate-pulse rounded-md bg-neutral-400"
           />
         ))}
       </>
@@ -47,7 +47,7 @@ export const List = <T,>(props: TList<T>) => {
 
   if (!showList) return null;
   return (
-    <ul className={cn("", props.classNames?.list)}>
+    <ul className={cn('', props.classNames?.list)}>
       <LoadingComponent
         showLoading={showLoading}
         loadingSkeletonLength={props.loadingSkeletonLength}

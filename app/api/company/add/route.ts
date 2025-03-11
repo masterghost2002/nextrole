@@ -1,5 +1,5 @@
-import { CompanyController, withErrorHandling } from "@/core";
-import { NextResponse } from "next/server";
+import { CompanyController, withErrorHandling } from '@/core';
+import { NextResponse } from 'next/server';
 
 export const POST = withErrorHandling(async (request: Request) => {
   const companyController = new CompanyController();

@@ -1,8 +1,8 @@
-"use client";
-import { cn } from "@/lib/utils";
-import { ButtonHTMLAttributes } from "react";
-import { signinWithGoogle } from "@/actions/auth";
-import { Button } from "@/components/ui/button";
+'use client';
+import { cn } from '@/lib/utils';
+import { ButtonHTMLAttributes } from 'react';
+import { signinWithGoogle } from '@/actions/auth';
+import { Button } from '@/components/ui/button';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;

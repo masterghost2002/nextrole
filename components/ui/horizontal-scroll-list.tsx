@@ -1,6 +1,6 @@
-"use client";
-import { cn } from "@/lib/utils";
-import React, { useRef } from "react";
+'use client';
+import { cn } from '@/lib/utils';
+import React, { useRef } from 'react';
 type props = {
   children: React.ReactNode;
   className?: string;
@@ -20,13 +20,13 @@ export const HorizontalScrollList = (props: props) => {
     isDragging = true;
     startX = e.pageX - container.offsetLeft;
     scrollLeft = container.scrollLeft;
-    container.style.cursor = "grabbing";
+    container.style.cursor = 'grabbing';
   };
 
   const handleMouseLeaveOrUp = () => {
     isDragging = false;
     const container = scrollContainerRef.current;
-    if (container) container.style.cursor = "grab";
+    if (container) container.style.cursor = 'grab';
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -42,7 +42,7 @@ export const HorizontalScrollList = (props: props) => {
 
   return (
     <div
-      className={cn("no-scrollbar", props.className)}
+      className={cn('no-scrollbar', props.className)}
       ref={scrollContainerRef}
       onMouseDown={handleMouseDown}
       onMouseLeave={handleMouseLeaveOrUp}
@@ -50,10 +50,10 @@ export const HorizontalScrollList = (props: props) => {
       onMouseMove={handleMouseMove}
       style={{
         ...props.style,
-        display: "flex",
-        overflowX: "auto",
-        cursor: "grab",
-        userSelect: "none",
+        display: 'flex',
+        overflowX: 'auto',
+        cursor: 'grab',
+        userSelect: 'none'
       }}
     >
       {props.children}

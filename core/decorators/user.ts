@@ -1,6 +1,6 @@
-import { UnauthorizedError } from "@/core/errors";
-import { createClient } from "@/lib/supabase";
-import DB from "@/core/db";
+import { UnauthorizedError } from '@/core/errors';
+import { createClient } from '@/lib/supabase';
+import DB from '@/core/db';
 /**
  * Basic authentication decorator
  * Ensures the user has completed initial authentication (e.g., Google OAuth)
@@ -25,18 +25,18 @@ export function auth() {
       const supabase = await createClient();
       const { data, error } = await supabase.auth.getUser();
       if (error) {
-        throw new UnauthorizedError("Authentication required");
+        throw new UnauthorizedError('Authentication required');
       }
 
       if (!data.user) {
-        throw new UnauthorizedError("Authentication required");
+        throw new UnauthorizedError('Authentication required');
       }
 
       const db = await DB.getInstance();
-      const user = await db.user.getUserByEmail(data.user.email || "");
+      const user = await db.user.getUserByEmail(data.user.email || '');
 
       if (!user) {
-        throw new UnauthorizedError("Authentication required");
+        throw new UnauthorizedError('Authentication required');
       }
 
       return originalMethod.apply(this, args);
@@ -72,7 +72,7 @@ export function auth() {
       const { data, error } = await supabase.auth.getUser();
 
       if (error || !data.user) {
-        throw new UnauthorizedError("Authentication required");
+        throw new UnauthorizedError('Authentication required');
       }
 
       // Add the user's email to the method's arguments

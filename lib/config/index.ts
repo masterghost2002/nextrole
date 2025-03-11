@@ -5,5 +5,5 @@ const auth_callback_url = `${process.env.NEXT_PUBLIC_DOMAIN}/auth/callback`;
 export const config: Readonly<Record<string, string>> = {
   supabaseKey,
   supabaseUrl,
-  auth_callback_url,
+  auth_callback_url
 };

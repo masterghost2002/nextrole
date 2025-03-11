@@ -1,25 +1,25 @@
-import React from "react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui";
+import React from 'react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui';
 
 export const TabSelector = () => {
   return (
-    <Tabs defaultValue="posts" className="w-full max-w-3xl mx-auto">
-      <TabsList className="flex items-center p-2 bg-neutral-100  justify-between rounded-none">
+    <Tabs defaultValue="posts" className="mx-auto w-full max-w-3xl">
+      <TabsList className="flex items-center justify-between rounded-none bg-neutral-100 p-2">
         <TabsTrigger
           value="posts"
-          className="text-sm data-[state=active]:bg-white data-[state=active]:text-primary-900 data-[state=active]:shadow-retro-sm data-[state=active]:border-primary-300 data-[state=active]:font-medium"
+          className="text-sm data-[state=active]:border-primary-300 data-[state=active]:bg-white data-[state=active]:font-medium data-[state=active]:text-primary-900 data-[state=active]:shadow-retro-sm"
         >
           Posts
         </TabsTrigger>
         <TabsTrigger
           value="experience"
-          className="text-sm data-[state=active]:bg-white data-[state=active]:text-primary-900 data-[state=active]:shadow-retro-sm data-[state=active]:border-primary-300 data-[state=active]:font-medium"
+          className="text-sm data-[state=active]:border-primary-300 data-[state=active]:bg-white data-[state=active]:font-medium data-[state=active]:text-primary-900 data-[state=active]:shadow-retro-sm"
         >
           Interview Experience
         </TabsTrigger>
         <TabsTrigger
           value="rating"
-          className="text-sm data-[state=active]:bg-white data-[state=active]:text-primary-900 data-[state=active]:shadow-retro-sm data-[state=active]:border-primary-300 data-[state=active]:font-medium"
+          className="text-sm data-[state=active]:border-primary-300 data-[state=active]:bg-white data-[state=active]:font-medium data-[state=active]:text-primary-900 data-[state=active]:shadow-retro-sm"
         >
           Rating
         </TabsTrigger>
@@ -27,29 +27,29 @@ export const TabSelector = () => {
 
       <TabsContent
         value="posts"
-        className="p-4 bg-white rounded-lg shadow-retro-sm border border-neutral-200"
+        className="rounded-lg border border-neutral-200 bg-white p-4 shadow-retro-sm"
       >
         <div className="space-y-4">
-          <h3 className="font-semibold text-lg text-neutral-900">
+          <h3 className="text-lg font-semibold text-neutral-900">
             Recent Posts
           </h3>
           <p className="text-sm text-neutral-700">
             Browse through the latest community posts and discussions.
           </p>
           <div className="grid gap-4 md:grid-cols-2">
-            <div className="p-3 bg-background rounded border border-neutral-200 hover:border-primary-300 transition-all">
+            <div className="rounded border border-neutral-200 bg-background p-3 transition-all hover:border-primary-300">
               <h4 className="font-medium text-neutral-800">
                 Getting started with React
               </h4>
-              <p className="text-sm text-neutral-600 mt-1">
+              <p className="mt-1 text-sm text-neutral-600">
                 A beginner's guide to React development
               </p>
             </div>
-            <div className="p-3 bg-background rounded border border-neutral-200 hover:border-primary-300 transition-all">
+            <div className="rounded border border-neutral-200 bg-background p-3 transition-all hover:border-primary-300">
               <h4 className="font-medium text-neutral-800">
                 Advanced TypeScript Tips
               </h4>
-              <p className="text-sm text-neutral-600 mt-1">
+              <p className="mt-1 text-sm text-neutral-600">
                 Improve your TypeScript skills with these pro tips
               </p>
             </div>
@@ -59,37 +59,37 @@ export const TabSelector = () => {
 
       <TabsContent
         value="experience"
-        className="p-4 bg-white rounded-lg shadow-retro-sm border border-neutral-200"
+        className="rounded-lg border border-neutral-200 bg-white p-4 shadow-retro-sm"
       >
         <div className="space-y-4">
-          <h3 className="font-semibold text-lg text-neutral-900">
+          <h3 className="text-lg font-semibold text-neutral-900">
             Interview Experiences
           </h3>
           <p className="text-sm text-neutral-700">
             Learn from others' interview journeys at top companies.
           </p>
           <div className="space-y-3">
-            <div className="p-3 bg-background rounded border border-neutral-200">
-              <div className="flex justify-between items-start">
+            <div className="rounded border border-neutral-200 bg-background p-3">
+              <div className="flex items-start justify-between">
                 <h4 className="font-medium text-neutral-800">
                   Google SWE Interview
                 </h4>
-                <span className="bg-primary-100 text-primary-900 text-xs px-2 py-1 rounded">
+                <span className="rounded bg-primary-100 px-2 py-1 text-xs text-primary-900">
                   Frontend
                 </span>
               </div>
-              <p className="text-sm text-neutral-600 mt-1">
+              <p className="mt-1 text-sm text-neutral-600">
                 My experience interviewing for the Frontend role at Google
               </p>
             </div>
-            <div className="p-3 bg-background rounded border border-neutral-200">
-              <div className="flex justify-between items-start">
+            <div className="rounded border border-neutral-200 bg-background p-3">
+              <div className="flex items-start justify-between">
                 <h4 className="font-medium text-neutral-800">Amazon SDE II</h4>
-                <span className="bg-primary-100 text-primary-900 text-xs px-2 py-1 rounded">
+                <span className="rounded bg-primary-100 px-2 py-1 text-xs text-primary-900">
                   Backend
                 </span>
               </div>
-              <p className="text-sm text-neutral-600 mt-1">
+              <p className="mt-1 text-sm text-neutral-600">
                 How I prepared and passed Amazon's SDE II interviews
               </p>
             </div>
@@ -99,17 +99,17 @@ export const TabSelector = () => {
 
       <TabsContent
         value="rating"
-        className="p-4 bg-white rounded-lg shadow-retro-sm border border-neutral-200"
+        className="rounded-lg border border-neutral-200 bg-white p-4 shadow-retro-sm"
       >
         <div className="space-y-4">
-          <h3 className="font-semibold text-lg text-neutral-900">
+          <h3 className="text-lg font-semibold text-neutral-900">
             Company Ratings
           </h3>
           <p className="text-sm text-neutral-700">
             See how companies are rated by our community members.
           </p>
           <div className="space-y-3">
-            <div className="p-3 bg-background rounded border border-neutral-200">
+            <div className="rounded border border-neutral-200 bg-background p-3">
               <div className="flex justify-between">
                 <h4 className="font-medium text-neutral-800">Microsoft</h4>
                 <div className="flex">
@@ -139,11 +139,11 @@ export const TabSelector = () => {
                   </svg>
                 </div>
               </div>
-              <p className="text-sm text-neutral-600 mt-1">
+              <p className="mt-1 text-sm text-neutral-600">
                 Based on 234 reviews
               </p>
             </div>
-            <div className="p-3 bg-background rounded border border-neutral-200">
+            <div className="rounded border border-neutral-200 bg-background p-3">
               <div className="flex justify-between">
                 <h4 className="font-medium text-neutral-800">Apple</h4>
                 <div className="flex">
@@ -162,7 +162,7 @@ export const TabSelector = () => {
                   ))}
                 </div>
               </div>
-              <p className="text-sm text-neutral-600 mt-1">
+              <p className="mt-1 text-sm text-neutral-600">
                 Based on 189 reviews
               </p>
             </div>
@@ -172,18 +172,18 @@ export const TabSelector = () => {
 
       <TabsContent
         value="users"
-        className="p-4 bg-white rounded-lg shadow-retro-sm border border-neutral-200"
+        className="rounded-lg border border-neutral-200 bg-white p-4 shadow-retro-sm"
       >
         <div className="space-y-4">
-          <h3 className="font-semibold text-lg text-neutral-900">
+          <h3 className="text-lg font-semibold text-neutral-900">
             Top Contributors
           </h3>
           <p className="text-sm text-neutral-700">
             Meet our most active community members.
           </p>
           <div className="grid gap-4 md:grid-cols-2">
-            <div className="p-3 bg-background rounded border border-neutral-200 flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary-200 rounded-full flex items-center justify-center text-primary-900 font-medium">
+            <div className="flex items-center gap-3 rounded border border-neutral-200 bg-background p-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-200 font-medium text-primary-900">
                 JD
               </div>
               <div>
@@ -191,8 +191,8 @@ export const TabSelector = () => {
                 <p className="text-xs text-neutral-600">142 contributions</p>
               </div>
             </div>
-            <div className="p-3 bg-background rounded border border-neutral-200 flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary-200 rounded-full flex items-center justify-center text-primary-900 font-medium">
+            <div className="flex items-center gap-3 rounded border border-neutral-200 bg-background p-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-200 font-medium text-primary-900">
                 JS
               </div>
               <div>
@@ -200,8 +200,8 @@ export const TabSelector = () => {
                 <p className="text-xs text-neutral-600">98 contributions</p>
               </div>
             </div>
-            <div className="p-3 bg-background rounded border border-neutral-200 flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary-200 rounded-full flex items-center justify-center text-primary-900 font-medium">
+            <div className="flex items-center gap-3 rounded border border-neutral-200 bg-background p-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-200 font-medium text-primary-900">
                 AR
               </div>
               <div>
@@ -209,8 +209,8 @@ export const TabSelector = () => {
                 <p className="text-xs text-neutral-600">76 contributions</p>
               </div>
             </div>
-            <div className="p-3 bg-background rounded border border-neutral-200 flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary-200 rounded-full flex items-center justify-center text-primary-900 font-medium">
+            <div className="flex items-center gap-3 rounded border border-neutral-200 bg-background p-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-200 font-medium text-primary-900">
                 BT
               </div>
               <div>

@@ -1,11 +1,11 @@
-import { userQueries } from "@/lib/api/query";
-import { useQuery } from "@tanstack/react-query";
+import { userQueries } from '@/lib/api/query';
+import { useQuery } from '@tanstack/react-query';
 
 export const useIsUserNameAvailable = (username: string) => {
   return useQuery({
-    queryKey: ["check-username-availability", username],
+    queryKey: ['check-username-availability', username],
     queryFn: () => userQueries.checkUserName(username),
     refetchOnWindowFocus: false,
-    enabled: !!username && username.trim()?.length >= 4,
+    enabled: !!username && username.trim()?.length >= 4
   });
 };

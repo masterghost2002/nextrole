@@ -1,4 +1,4 @@
-import DB from "@/core/db";
+import DB from '@/core/db';
 export function InjectDB() {
   return function <T extends { new (...args: any[]): {} }>(constructor: T) {
     return class extends constructor {

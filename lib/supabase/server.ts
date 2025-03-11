@@ -1,6 +1,6 @@
-"use server";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+'use server';
+import { createServerClient } from '@supabase/ssr';
+import { cookies } from 'next/headers';
 
 export async function createClient() {
   const cookieStore = await cookies();
@@ -23,8 +23,8 @@ export async function createClient() {
             // This can be ignored if you have middleware refreshing
             // user sessions.
           }
-        },
-      },
+        }
+      }
     }
   );
 }

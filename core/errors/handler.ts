@@ -1,5 +1,5 @@
-import { NextResponse, NextRequest } from "next/server";
-import { BaseError } from "@/core/errors";
+import { NextResponse, NextRequest } from 'next/server';
+import { BaseError } from '@/core/errors';
 
 type ApiHandler<T extends Request | NextRequest> = (
   req: T
@@ -17,7 +17,7 @@ export const withErrorHandling = <T extends Request | NextRequest>(
           {
             error: error.message,
             code: error.code,
-            data: error.data,
+            data: error.data
           },
           { status: error.statusCode }
         );
@@ -25,8 +25,8 @@ export const withErrorHandling = <T extends Request | NextRequest>(
 
       return NextResponse.json(
         {
-          error: "Internal Server Error",
-          code: "INTERNAL_SERVER_ERROR",
+          error: 'Internal Server Error',
+          code: 'INTERNAL_SERVER_ERROR'
         },
         { status: 500 }
       );

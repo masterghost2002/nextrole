@@ -1,1 +1,1 @@
-export * from "./quick-bar";
+export * from './quick-bar';

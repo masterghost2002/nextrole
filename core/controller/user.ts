@@ -1,7 +1,7 @@
-import { CreateUserSchema, UsernameSchema } from "@/core/dto";
-import { BadRequestError } from "@/core/errors";
-import { basicAuth, InjectDB } from "../decorators";
-import type { CreateUserDto, UsernameDto } from "@/core/dto";
+import { CreateUserSchema, UsernameSchema } from '@/core/dto';
+import { BadRequestError } from '@/core/errors';
+import { basicAuth, InjectDB } from '../decorators';
+import type { CreateUserDto, UsernameDto } from '@/core/dto';
 @InjectDB()
 export class UserController {
   private db!: Promise<DB>;
@@ -10,14 +10,14 @@ export class UserController {
   async createUser(user: CreateUserDto, email?: string) {
     const validatedUser = CreateUserSchema.safeParse({
       ...user,
-      dob: new Date(user.dob),
+      dob: new Date(user.dob)
     });
     if (!email) {
-      throw new BadRequestError("Email is required");
+      throw new BadRequestError('Email is required');
     }
     if (validatedUser.error) {
       throw new BadRequestError(validatedUser.error.message, {
-        data: validatedUser.error,
+        data: validatedUser.error
       });
     }
     const db = await this.db;
@@ -29,7 +29,7 @@ export class UserController {
       dob: parsedUser.dob.toISOString(),
       yoe: parsedUser.yearOfExperience || null,
       current_company_id: null,
-      current_position: null,
+      current_position: null
     };
     const response = await db.user.createUser(userData);
     return response;
@@ -37,12 +37,12 @@ export class UserController {
   @basicAuth()
   async isUsernameAvailable(username: UsernameDto | null) {
     if (!username) {
-      throw new BadRequestError("Username is required");
+      throw new BadRequestError('Username is required');
     }
     const parsedUsername = UsernameSchema.safeParse(username);
     if (parsedUsername.error) {
       throw new BadRequestError(
-        "Invalid username",
+        'Invalid username',
         parsedUsername.error.issues[0].message
       );
     }

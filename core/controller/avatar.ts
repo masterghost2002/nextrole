@@ -1,4 +1,4 @@
-import { InjectDB, basicAuth } from "@/core/decorators";
+import { InjectDB, basicAuth } from '@/core/decorators';
 @InjectDB()
 export class AvatarController {
   private db!: Promise<DB>;
