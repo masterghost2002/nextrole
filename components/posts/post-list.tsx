@@ -1,11 +1,13 @@
-import { PostCardSkeleton } from '../skeletons';
+import { useEffect, useRef } from 'react';
+import { InfiniteData } from '@tanstack/react-query';
 import { PostCard } from './post-card';
 
 type TProps = {
-  data: TPost[];
-  fetchMore: ({ limit, page }: { limit: number; page: number }) => void;
+  data: InfiniteData<TPost[]>;
+  fetchMore: () => void;
   isLoading: boolean;
   isFetchingMore: boolean;
+  hasMoreData: boolean;
 };
 
 const tempCompany: TCompany = {
@@ -21,22 +23,58 @@ const tempCompany: TCompany = {
   verification_status: 'VERIFIED'
 };
 
-export const PostList = (props: TProps) => {
-  if (props.isLoading)
-    return (
-      <>
-        <PostCardSkeleton />
-        <PostCardSkeleton />
-        <PostCardSkeleton />
-        <PostCardSkeleton />
-        <PostCardSkeleton />
-      </>
+export const PostList = ({
+  data,
+  fetchMore,
+  isLoading,
+  isFetchingMore,
+  hasMoreData
+}: TProps) => {
+  const observerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!hasMoreData || isFetchingMore) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchMore();
+        }
+      },
+      { rootMargin: '100px' }
     );
+
+    if (observerRef.current) observer.observe(observerRef.current);
+
+    return () => {
+      if (observerRef.current) observer.unobserve(observerRef.current);
+    };
+  }, [hasMoreData, isFetchingMore, fetchMore]);
+
+  if (isLoading)
+    return (
+      <div className="flex justify-center py-10">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-blue-500"></div>
+      </div>
+    );
+
   return (
-    <ul className="flex flex-col gap-2">
-      {props.data.map((post) => (
-        <PostCard key={post.id} post={post} company={tempCompany} />
-      ))}
-    </ul>
+    <>
+      {data.pages.map((page) =>
+        page.map((post) => (
+          <PostCard key={post.id} company={tempCompany} post={post} />
+        ))
+      )}
+
+      {/* Intersection observer target for infinite scroll */}
+      {hasMoreData && <div ref={observerRef} style={{ height: '1px' }} />}
+
+      {/* Tailwind Spinner when fetching more */}
+      {isFetchingMore && (
+        <div className="flex justify-center py-4">
+          <div className="h-6 w-6 animate-spin rounded-full border-4 border-gray-300 border-t-blue-500"></div>
+        </div>
+      )}
+    </>
   );
 };

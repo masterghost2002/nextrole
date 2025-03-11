@@ -8,9 +8,11 @@ type TProps = {
 };
 export const PostTab = (props: TProps) => {
   const {
-    data = [],
+    data = { pages: [], pageParams: [] },
     isLoading,
-    isFetching
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage
   } = useGetPostByCompanyId({
     company_id: props.id,
     limit: 10,
@@ -25,9 +27,10 @@ export const PostTab = (props: TProps) => {
       </p>
       <PostList
         data={data}
-        isFetchingMore={isFetching}
+        isFetchingMore={isFetchingNextPage}
         isLoading={isLoading}
-        fetchMore={({ page, limit }) => {}}
+        fetchMore={fetchNextPage}
+        hasMoreData={hasNextPage}
       />
     </div>
   );
