@@ -20,6 +20,7 @@ export class PostController {
     return result;
   }
 
+  @auth()
   async getPostsByCompanyId(params: TGetPostByCompanyIdDto) {
     const validatedParams = GetPostByCompanyIdDto.safeParse(params);
     if (validatedParams.error)
